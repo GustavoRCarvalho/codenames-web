@@ -19,6 +19,7 @@ const Button = styled.button`
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: #fff;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
@@ -27,5 +28,13 @@ const Button = styled.button`
 
   &:hover {
     border-color: #646cff;
+  }
+  @media (prefers-color-scheme: light) {
+    color: #000;
+    background-color: #ededed;
+
+    &:hover {
+      border-color: #000447;
+    }
   }
 `

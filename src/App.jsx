@@ -97,6 +97,10 @@ function App() {
     return wordList.pinkList.length - count
   }
 
+  function handleChangeTurn() {
+    setTurn((value) => !value)
+  }
+
   return (
     <>
       <ContentContainer>
@@ -105,12 +109,14 @@ function App() {
           wordList={wordList.shuffle}
           selected={selected}
           setSelected={setSelected}
+          turn={turn}
+          handleChangeTurn={handleChangeTurn}
         ></Grid>
         <TipsBackground turn={!turn} color={"#3aa4ff"} rest={blueRest()} />
       </ContentContainer>
       <NextTurnButton
         $color={turn ? "#eb37bc" : "#3aa4ff"}
-        onClick={() => setTurn((value) => !value)}
+        onClick={handleChangeTurn}
       >
         Passar Turno
       </NextTurnButton>
@@ -120,6 +126,7 @@ function App() {
 
 const NextTurnButton = styled.button`
   background-color: ${(props) => props.$color};
+  color: #fff;
 
   width: 50%;
   max-width: 750px;

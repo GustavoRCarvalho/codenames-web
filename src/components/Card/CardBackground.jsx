@@ -3,12 +3,10 @@ import { CardLabel } from "./CardLabel"
 
 export const CardBackground = ({
   label,
-  showAll,
+  active,
   teamColor,
-  selected,
-  setSelected,
+  handleClickCard,
 }) => {
-  const active = showAll ? true : selected.find((value) => value === label)
   const color = () => {
     switch (teamColor) {
       case "pink":
@@ -34,19 +32,13 @@ export const CardBackground = ({
     }
   }
 
-  function handleCardClick() {
-    if (!active) {
-      setSelected((values) => {
-        return [...values, label]
-      })
-    }
-  }
-
   return (
     <Background
       $active={active}
       $color={color().color}
-      onClick={handleCardClick}
+      onClick={() =>
+        handleClickCard({ active: active, label: label, teamColor: teamColor })
+      }
     >
       <CardInside $active={active} $bordercolor={color().bordercolor}>
         <CardLabel>{label}</CardLabel>
@@ -65,6 +57,16 @@ const Background = styled.div`
     props.$color === "#fff" && props.$active ? "#000" : "#fff"};
 
   cursor: pointer;
+
+  @media (prefers-color-scheme: light) {
+    background-color: ${(props) => (props.$active ? props.$color : "#ffdece")};
+    color: ${(props) =>
+      props.$color === "#fff" && props.$active
+        ? "#000"
+        : props.$active
+        ? "#eeeeee"
+        : "#000"};
+  }
 `
 
 const CardInside = styled.div`

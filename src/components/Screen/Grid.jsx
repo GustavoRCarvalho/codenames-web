@@ -3,7 +3,13 @@ import { CardBackground } from "../Card/CardBackground"
 import { useState } from "react"
 import { ShowAllButton } from "./ShowAllButton"
 
-export const Grid = ({ wordList, selected, setSelected }) => {
+export const Grid = ({
+  wordList,
+  selected,
+  setSelected,
+  turn,
+  handleChangeTurn,
+}) => {
   const [showAll, setShowAll] = useState(false)
 
   function column() {
@@ -18,20 +24,40 @@ export const Grid = ({ wordList, selected, setSelected }) => {
     return "1fr 1fr 1fr 1fr 1fr"
   }
 
+  function handleClickCard({ active, label, teamColor }) {
+    if (!active) {
+      setSelected((values) => {
+        return [...values, label]
+      })
+    }
+    if (teamColor === "white") {
+      handleChangeTurn()
+    } else if (teamColor === "blue" && turn) {
+      handleChangeTurn()
+    } else if (teamColor === "pink" && !turn) {
+      handleChangeTurn()
+    } else if (teamColor === "black") {
+      setShowAll(true)
+    }
+  }
+
   return (
     <GridWrapper>
       <ShowAllButton showAll={showAll} setShowAll={setShowAll} />
       <GridBackground $column={column()}>
         {wordList.map((card) => {
+          const active = showAll
+            ? true
+            : selected.find((value) => value === card.label)
           return (
             <CardBackground
               key={card.label}
               showAll={showAll}
+              active={active}
               teamColor={card.teamColor}
-              color={card.color}
-              bordercolor={card.bordercolor}
               selected={selected}
               setSelected={setSelected}
+              handleClickCard={handleClickCard}
               label={card.label}
             />
           )
