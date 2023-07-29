@@ -37,6 +37,7 @@ export const TipsBackground = ({ color, rest }) => {
           })}
         </TipsWrapper>
         <TipsInput
+          maxLength={21}
           value={tipInput}
           onChange={(e) => {
             setTipInput(e.target.value)
@@ -67,6 +68,8 @@ const TipsWrapper = styled.div`
 
 const Title = styled.h2`
   color: ${(props) => props.$color ?? "#fff"};
+  margin: 0.9em;
+  font-size: 1.4em;
 `
 
 const Background = styled.div`
