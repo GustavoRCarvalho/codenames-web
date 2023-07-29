@@ -5,6 +5,7 @@ import { Grid } from "./components/Screen/Grid"
 import { TipsBackground } from "./components/TeamsTips.jsx/TipsBackground"
 import { styled } from "styled-components"
 import { useMemo, useState } from "react"
+import { Stopwatch } from "./components/Screen/Stopwatch"
 
 function App() {
   const [selected, setSelected] = useState([])
@@ -103,6 +104,7 @@ function App() {
 
   return (
     <>
+      <Stopwatch time={240} turn={turn} setTurn={setTurn} />
       <ContentContainer>
         <TipsBackground turn={turn} color={"#eb37bc"} rest={pinkRest()} />
         <Grid
