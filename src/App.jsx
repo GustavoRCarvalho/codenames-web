@@ -13,34 +13,45 @@ function App() {
   const [showAll, setShowAll] = useState(false)
 
   const wordList = useMemo(() => {
-    return shuffleArray([
-      ...Array.apply(null, Array(9)).map(() => {
-        return {
-          label: words[getRandomArbitrary(0, words.length)],
-          color: "#eb37bc",
-          bordercolor: "#b4298f",
+    let wordsLabels = words
+
+    const wordLabelsList = Array.apply(null, Array(25)).map(() => {
+      const randomNumber = getRandomArbitrary(0, wordsLabels.length)
+      const label = wordsLabels[randomNumber]
+      wordsLabels = wordsLabels.filter((value) => value !== label)
+
+      return label
+    })
+
+    return shuffleArray(
+      wordLabelsList.map((label, index) => {
+        if (index < 9) {
+          return {
+            label: label,
+            color: "#eb37bc",
+            bordercolor: "#b4298f",
+          }
+        } else if (index < 17) {
+          return {
+            label: label,
+            color: "#3aa4ff",
+            bordercolor: "#2967b4",
+          }
+        } else if (index < 24) {
+          return {
+            label: label,
+            color: "#fff",
+            bordercolor: "#2c2c2c",
+          }
+        } else {
+          return {
+            label: label,
+            color: "#121212",
+            bordercolor: "#505050",
+          }
         }
-      }),
-      ...Array.apply(null, Array(8)).map(() => {
-        return {
-          label: words[getRandomArbitrary(0, words.length)],
-          color: "#3aa4ff",
-          bordercolor: "#2967b4",
-        }
-      }),
-      ...Array.apply(null, Array(7)).map(() => {
-        return {
-          label: words[getRandomArbitrary(0, words.length)],
-          color: "#fff",
-          bordercolor: "#2c2c2c",
-        }
-      }),
-      {
-        label: words[getRandomArbitrary(0, words.length)],
-        color: "#121212",
-        bordercolor: "#505050",
-      },
-    ])
+      })
+    )
   }, [])
 
   return (
@@ -49,10 +60,10 @@ function App() {
       <ContentContainer>
         <TipsBackground color={"#eb37bc"} />
         <Grid>
-          {wordList.map((card, index) => {
+          {wordList.map((card) => {
             return (
               <CardBackground
-                key={index}
+                key={card.label}
                 showAll={showAll}
                 color={card.color}
                 bordercolor={card.bordercolor}
@@ -74,7 +85,6 @@ const ContentContainer = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 60vh;
   min-height: 500px;
 `
 
