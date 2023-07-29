@@ -6,14 +6,14 @@ import { ShowAllButton } from "./components/Screen/ShowAllButton"
 import { TipsBackground } from "./components/TeamsTips.jsx/TipsBackground"
 import { styled } from "styled-components"
 import { words } from "./assets/words"
-import { getRandomArbitrary } from "./assets/utils"
+import { getRandomArbitrary, shuffleArray } from "./assets/utils"
 
 function App() {
   const [selected, setSelected] = useState([])
   const [showAll, setShowAll] = useState(false)
 
   const wordList = useMemo(() => {
-    return [
+    return shuffleArray([
       ...Array.apply(null, Array(9)).map(() => {
         return {
           label: words[getRandomArbitrary(0, words.length)],
@@ -40,7 +40,7 @@ function App() {
         color: "#121212",
         bordercolor: "#505050",
       },
-    ]
+    ])
   }, [])
 
   return (
