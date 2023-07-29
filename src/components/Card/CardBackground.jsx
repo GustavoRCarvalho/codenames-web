@@ -12,9 +12,7 @@ export const CardBackground = ({
   const active = showAll ? true : selected.find((value) => value === label)
 
   function handleCardClick() {
-    if (active) {
-      console.log("click")
-    } else {
+    if (!active) {
       setSelected((values) => {
         return [...values, label]
       })

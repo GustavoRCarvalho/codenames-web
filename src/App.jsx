@@ -3,6 +3,8 @@ import "./App.css"
 import { CardBackground } from "./components/Card/CardBackground"
 import { Grid } from "./components/Screen/Grid"
 import { ShowAllButton } from "./components/Screen/ShowAllButton"
+import { TipsBackground } from "./components/TeamsTips.jsx/TipsBackground"
+import { styled } from "styled-components"
 
 function App() {
   const [selected, setSelected] = useState([])
@@ -39,23 +41,36 @@ function App() {
   return (
     <>
       <ShowAllButton showAll={showAll} setShowAll={setShowAll} />
-      <Grid>
-        {words.map((card, index) => {
-          return (
-            <CardBackground
-              key={index}
-              showAll={showAll}
-              color={card.color}
-              bordercolor={card.bordercolor}
-              selected={selected}
-              setSelected={setSelected}
-              label={card.label}
-            ></CardBackground>
-          )
-        })}
-      </Grid>
+      <ContentContainer>
+        <TipsBackground color={"#eb37bc"} />
+        <Grid>
+          {words.map((card, index) => {
+            return (
+              <CardBackground
+                key={index}
+                showAll={showAll}
+                color={card.color}
+                bordercolor={card.bordercolor}
+                selected={selected}
+                setSelected={setSelected}
+                label={card.label}
+              ></CardBackground>
+            )
+          })}
+        </Grid>
+        <TipsBackground color={"#3aa4ff"} />
+      </ContentContainer>
     </>
   )
 }
+
+const ContentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 60vh;
+  min-height: 500px;
+`
 
 export default App
