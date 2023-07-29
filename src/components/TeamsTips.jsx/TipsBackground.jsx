@@ -3,7 +3,7 @@ import { TipsCard } from "./TipsCard"
 import { TipsInput } from "./TipsInput"
 import { useState } from "react"
 
-export const TipsBackground = ({ color, rest }) => {
+export const TipsBackground = ({ color, rest, turn }) => {
   const [tips, setTips] = useState([])
   const [tipInput, setTipInput] = useState("")
 
@@ -37,6 +37,7 @@ export const TipsBackground = ({ color, rest }) => {
           })}
         </TipsWrapper>
         <TipsInput
+          show={turn}
           maxLength={21}
           value={tipInput}
           onChange={(e) => {
@@ -74,7 +75,7 @@ const Title = styled.h2`
 
 const Background = styled.div`
   background-color: ${(props) => props.$backgroundcolor ?? "#474747"};
-  max-width: 300px;
+  width: 200px;
   flex: 1;
   display: flex;
   flex-direction: column;

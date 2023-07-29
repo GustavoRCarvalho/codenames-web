@@ -8,6 +8,7 @@ import { useMemo, useState } from "react"
 
 function App() {
   const [selected, setSelected] = useState([])
+  const [turn, setTurn] = useState(true)
 
   const wordList = useMemo(() => {
     let wordsLabels = words
@@ -99,17 +100,47 @@ function App() {
   return (
     <>
       <ContentContainer>
-        <TipsBackground color={"#eb37bc"} rest={pinkRest()} />
+        <TipsBackground turn={turn} color={"#eb37bc"} rest={pinkRest()} />
         <Grid
           wordList={wordList.shuffle}
           selected={selected}
           setSelected={setSelected}
         ></Grid>
-        <TipsBackground color={"#3aa4ff"} rest={blueRest()} />
+        <TipsBackground turn={!turn} color={"#3aa4ff"} rest={blueRest()} />
       </ContentContainer>
+      <NextTurnButton
+        $color={turn ? "#eb37bc" : "#3aa4ff"}
+        onClick={() => setTurn((value) => !value)}
+      >
+        Passar Turno
+      </NextTurnButton>
     </>
   )
 }
+
+const NextTurnButton = styled.button`
+  background-color: ${(props) => props.$color};
+
+  width: 50%;
+  max-width: 750px;
+
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+
+  border-radius: 8px;
+  border: none;
+  transition: box-shadow 0.25s;
+
+  padding: 0.6em 1.2em;
+  margin: 1em;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: inset 0 0 1em #0009;
+  }
+`
 
 const ContentContainer = styled.div`
   display: flex;
