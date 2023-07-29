@@ -3,7 +3,7 @@ import { TipsCard } from "./TipsCard"
 import { TipsInput } from "./TipsInput"
 import { useState } from "react"
 
-export const TipsBackground = ({ color }) => {
+export const TipsBackground = ({ color, rest }) => {
   const [tips, setTips] = useState([])
   const [tipInput, setTipInput] = useState("")
 
@@ -27,23 +27,32 @@ export const TipsBackground = ({ color }) => {
   }
 
   return (
-    <Background $backgroundcolor={color}>
-      <Title>DICAS: </Title>
-      <TipsWrapper>
-        {tips.map((label, index) => {
-          return <TipsCard key={label + index}>{label}</TipsCard>
-        })}
-      </TipsWrapper>
-      <TipsInput
-        value={tipInput}
-        onChange={(e) => {
-          setTipInput(e.target.value)
-        }}
-        onKeyDown={handleTypeEnter}
-      />
-    </Background>
+    <TipsContainer>
+      <Title $color={color}>FALTAM: {rest}</Title>
+      <Background $backgroundcolor={color}>
+        <Title>DICAS: </Title>
+        <TipsWrapper>
+          {tips.map((label, index) => {
+            return <TipsCard key={label + index}>{label}</TipsCard>
+          })}
+        </TipsWrapper>
+        <TipsInput
+          value={tipInput}
+          onChange={(e) => {
+            setTipInput(e.target.value)
+          }}
+          onKeyDown={handleTypeEnter}
+        />
+      </Background>
+    </TipsContainer>
   )
 }
+
+const TipsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const TipsWrapper = styled.div`
   flex: 1;
@@ -56,7 +65,9 @@ const TipsWrapper = styled.div`
   }
 `
 
-const Title = styled.h2``
+const Title = styled.h2`
+  color: ${(props) => props.$color ?? "#fff"};
+`
 
 const Background = styled.div`
   background-color: ${(props) => props.$backgroundcolor ?? "#474747"};

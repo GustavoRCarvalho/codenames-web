@@ -4,12 +4,35 @@ import { CardLabel } from "./CardLabel"
 export const CardBackground = ({
   label,
   showAll,
-  color,
-  bordercolor,
+  teamColor,
   selected,
   setSelected,
 }) => {
   const active = showAll ? true : selected.find((value) => value === label)
+  const color = () => {
+    switch (teamColor) {
+      case "pink":
+        return {
+          color: "#eb37bc",
+          bordercolor: "#b4298f",
+        }
+      case "blue":
+        return {
+          color: "#3aa4ff",
+          bordercolor: "#2967b4",
+        }
+      case "white":
+        return {
+          color: "#fff",
+          bordercolor: "#2c2c2c",
+        }
+      default:
+        return {
+          color: "#121212",
+          bordercolor: "#ffeb00",
+        }
+    }
+  }
 
   function handleCardClick() {
     if (!active) {
@@ -20,8 +43,12 @@ export const CardBackground = ({
   }
 
   return (
-    <Background $active={active} $color={color} onClick={handleCardClick}>
-      <CardInside $active={active} $bordercolor={bordercolor}>
+    <Background
+      $active={active}
+      $color={color().color}
+      onClick={handleCardClick}
+    >
+      <CardInside $active={active} $bordercolor={color().bordercolor}>
         <CardLabel>{label}</CardLabel>
       </CardInside>
     </Background>
@@ -46,6 +73,7 @@ const CardInside = styled.div`
   padding: 1em;
   border-radius: 0.25em;
 
+  background-color: #0002;
   border: 1px ${(props) => (props.$active ? props.$bordercolor : "#505050")}
     solid;
 `

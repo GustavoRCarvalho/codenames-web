@@ -1,16 +1,13 @@
-import { useMemo, useState } from "react"
 import "./App.css"
-import { CardBackground } from "./components/Card/CardBackground"
+import { getRandomArbitrary, shuffleArray } from "./assets/utils"
+import { words } from "./assets/words"
 import { Grid } from "./components/Screen/Grid"
-import { ShowAllButton } from "./components/Screen/ShowAllButton"
 import { TipsBackground } from "./components/TeamsTips.jsx/TipsBackground"
 import { styled } from "styled-components"
-import { words } from "./assets/words"
-import { getRandomArbitrary, shuffleArray } from "./assets/utils"
+import { useMemo, useState } from "react"
 
 function App() {
   const [selected, setSelected] = useState([])
-  const [showAll, setShowAll] = useState(false)
 
   const wordList = useMemo(() => {
     let wordsLabels = words
@@ -23,58 +20,92 @@ function App() {
       return label
     })
 
-    return shuffleArray(
-      wordLabelsList.map((label, index) => {
-        if (index < 9) {
+    return {
+      pinkList: wordLabelsList
+        .filter((_, index) => index < 9)
+        .map((label) => {
           return {
             label: label,
-            color: "#eb37bc",
-            bordercolor: "#b4298f",
+            teamColor: "pink",
           }
-        } else if (index < 17) {
+        }),
+      blueList: wordLabelsList
+        .filter((_, index) => index > 8 && index < 17)
+        .map((label) => {
           return {
             label: label,
-            color: "#3aa4ff",
-            bordercolor: "#2967b4",
+            teamColor: "blue",
           }
-        } else if (index < 24) {
+        }),
+      whiteList: wordLabelsList
+        .filter((_, index) => index > 23)
+        .map((label) => {
           return {
             label: label,
-            color: "#fff",
-            bordercolor: "#2c2c2c",
+            teamColor: "white",
           }
-        } else {
-          return {
-            label: label,
-            color: "#121212",
-            bordercolor: "#505050",
+        }),
+      shuffle: shuffleArray(
+        wordLabelsList.map((label, index) => {
+          if (index < 9) {
+            return {
+              label: label,
+              teamColor: "pink",
+            }
+          } else if (index < 17) {
+            return {
+              label: label,
+              teamColor: "blue",
+            }
+          } else if (index < 24) {
+            return {
+              label: label,
+              teamColor: "white",
+            }
+          } else {
+            return {
+              label: label,
+              teamColor: "black",
+            }
           }
+        })
+      ),
+    }
+  }, [])
+
+  const blueRest = () => {
+    let count = 0
+    wordList.blueList.forEach((element) => {
+      selected.forEach((selectedElement) => {
+        if (selectedElement === element.label) {
+          count += 1
         }
       })
-    )
-  }, [])
+    })
+    return wordList.blueList.length - count
+  }
+  const pinkRest = () => {
+    let count = 0
+    wordList.pinkList.forEach((element) => {
+      selected.forEach((selectedElement) => {
+        if (selectedElement === element.label) {
+          count += 1
+        }
+      })
+    })
+    return wordList.pinkList.length - count
+  }
 
   return (
     <>
-      <ShowAllButton showAll={showAll} setShowAll={setShowAll} />
       <ContentContainer>
-        <TipsBackground color={"#eb37bc"} />
-        <Grid>
-          {wordList.map((card) => {
-            return (
-              <CardBackground
-                key={card.label}
-                showAll={showAll}
-                color={card.color}
-                bordercolor={card.bordercolor}
-                selected={selected}
-                setSelected={setSelected}
-                label={card.label}
-              ></CardBackground>
-            )
-          })}
-        </Grid>
-        <TipsBackground color={"#3aa4ff"} />
+        <TipsBackground color={"#eb37bc"} rest={pinkRest()} />
+        <Grid
+          wordList={wordList.shuffle}
+          selected={selected}
+          setSelected={setSelected}
+        ></Grid>
+        <TipsBackground color={"#3aa4ff"} rest={blueRest()} />
       </ContentContainer>
     </>
   )
