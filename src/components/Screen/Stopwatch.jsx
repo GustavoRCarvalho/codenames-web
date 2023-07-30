@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai"
+import { CommonButton } from "./CommonButton"
 
 export const Stopwatch = ({ time, turn, setTurn }) => {
-  const [isActive, setIsActive] = useState(true)
   const [isPaused, setIsPaused] = useState(false)
   const [timeCount, setTimeCount] = useState(time)
   const minutes = parseInt(timeCount / 60)
@@ -14,7 +14,7 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
   useEffect(() => {
     let interval = null
 
-    if (isActive && isPaused === false) {
+    if (isPaused === false) {
       interval = setInterval(() => {
         setTimeCount((value) => value - 1)
       }, 1000)
@@ -24,7 +24,7 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
     return () => {
       clearInterval(interval)
     }
-  }, [isActive, isPaused])
+  }, [isPaused])
 
   useEffect(() => {
     if (minutes === "00" && seconds === "00") {
@@ -34,34 +34,36 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
 
   useEffect(() => {
     setTimeCount(time)
-  }, [turn])
+  }, [time, turn])
 
-  // const handleStart = () => {
-  //   setIsActive(true)
-  //   setIsPaused(false)
-  // }
-
-  // const handlePauseResume = () => {
-  //   setIsPaused((value) => !value)
-  // }
-
-  // const handleReset = () => {
-  //   setIsActive(false)
-  //   setTime(0)
-  // }
+  const handlePauseResume = () => {
+    setIsPaused((value) => !value)
+  }
 
   return (
     <WatchContainer>
-      <ArrowLeftIcon show={turn} />
-      <Watch>
-        {minutes} : {seconds}
-      </Watch>
-      <ArrowRightIcon show={!turn} />
+      <WatchControl>
+        <ArrowLeftIcon show={turn} />
+        <Watch paused={isPaused}>
+          {minutes} : {seconds}
+        </Watch>
+        <ArrowRightIcon show={!turn} />
+      </WatchControl>
+      <CommonButton onClick={handlePauseResume}>
+        {isPaused ? "Continuar" : "Pausar"}
+      </CommonButton>
     </WatchContainer>
   )
 }
 
 const WatchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const WatchControl = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,19 +72,22 @@ const WatchContainer = styled.div`
 const Watch = styled.p`
   font-size: 1.2em;
   font-weight: bold;
+  margin: 0;
   margin-inline: 1em;
+
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: ${(props) => (props.paused ? "2px solid red" : "2px solid #0000")};
 `
 
 const ArrowRightIcon = styled(AiOutlineArrowRight)`
   color: #3aa4ff;
   width: 2em;
-  height: ${(props) => (props.show ? " 2em" : 0)};
+  height: ${(props) => (props.show ? "2em" : "0em")};
 `
 
 const ArrowLeftIcon = styled(AiOutlineArrowLeft)`
-  display: ${(props) => (props.show ? "block" : "none")};
-
   color: #eb37bc;
   width: 2em;
-  height: ${(props) => (props.show ? " 2em" : 0)};
+  height: ${(props) => (props.show ? "2em" : "0em")};
 `

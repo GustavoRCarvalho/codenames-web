@@ -1,18 +1,6 @@
 import { styled } from "styled-components"
 
-export const ShowAllButton = ({ showAll, setShowAll }) => {
-  function handleClickShow() {
-    setShowAll((value) => !value)
-  }
-
-  return (
-    <Button type="button" onClick={handleClickShow}>
-      {showAll ? "ESCONDER TODOS" : "MOSTRAR TODOS"}
-    </Button>
-  )
-}
-
-const Button = styled.button`
+export const CommonButton = styled.button`
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;

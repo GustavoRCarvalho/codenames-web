@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 import { CardBackground } from "../Card/CardBackground"
 import { useState } from "react"
-import { ShowAllButton } from "./ShowAllButton"
+import { CommonButton } from "./CommonButton"
 
 export const Grid = ({
   wordList,
@@ -41,9 +41,15 @@ export const Grid = ({
     }
   }
 
+  function handleClickShow() {
+    setShowAll((value) => !value)
+  }
+
   return (
     <GridWrapper>
-      <ShowAllButton showAll={showAll} setShowAll={setShowAll} />
+      <CommonButton onClick={handleClickShow}>
+        {showAll ? "ESCONDER TODOS" : "MOSTRAR TODOS"}
+      </CommonButton>
       <GridBackground $column={column()}>
         {wordList.map((card) => {
           const active = showAll
