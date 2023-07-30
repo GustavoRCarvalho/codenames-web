@@ -22,56 +22,51 @@ function App() {
       return label
     })
 
+    const pinkList = wordLabelsList
+      .filter((_, index) => index < 9)
+      .map((label) => {
+        return {
+          label: label,
+          teamColor: "pink",
+        }
+      })
+    const blueList = wordLabelsList
+      .filter((_, index) => index > 8 && index < 17)
+      .map((label) => {
+        return {
+          label: label,
+          teamColor: "blue",
+        }
+      })
+
+    const whiteList = wordLabelsList
+      .filter((_, index) => index > 16 && index < 24)
+      .map((label) => {
+        return {
+          label: label,
+          teamColor: "white",
+        }
+      })
+
+    const blackList = wordLabelsList
+      .filter((_, index) => index > 23)
+      .map((label) => {
+        return {
+          label: label,
+          teamColor: "white",
+        }
+      })
     return {
-      pinkList: wordLabelsList
-        .filter((_, index) => index < 9)
-        .map((label) => {
-          return {
-            label: label,
-            teamColor: "pink",
-          }
-        }),
-      blueList: wordLabelsList
-        .filter((_, index) => index > 8 && index < 17)
-        .map((label) => {
-          return {
-            label: label,
-            teamColor: "blue",
-          }
-        }),
-      whiteList: wordLabelsList
-        .filter((_, index) => index > 23)
-        .map((label) => {
-          return {
-            label: label,
-            teamColor: "white",
-          }
-        }),
-      shuffle: shuffleArray(
-        wordLabelsList.map((label, index) => {
-          if (index < 9) {
-            return {
-              label: label,
-              teamColor: "pink",
-            }
-          } else if (index < 17) {
-            return {
-              label: label,
-              teamColor: "blue",
-            }
-          } else if (index < 24) {
-            return {
-              label: label,
-              teamColor: "white",
-            }
-          } else {
-            return {
-              label: label,
-              teamColor: "black",
-            }
-          }
-        })
-      ),
+      pinkList: pinkList,
+      blueList: blueList,
+      whiteList: whiteList,
+      blackList: blackList,
+      shuffle: shuffleArray([
+        ...pinkList,
+        ...blueList,
+        ...whiteList,
+        ...blackList,
+      ]),
     }
   }, [])
 
