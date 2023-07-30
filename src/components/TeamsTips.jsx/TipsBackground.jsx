@@ -1,11 +1,12 @@
 import { styled } from "styled-components"
 import { TipsCard } from "./TipsCard"
 import { TipsInput } from "./TipsInput"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const TipsBackground = ({ color, rest, turn }) => {
   const [tips, setTips] = useState([])
   const [tipInput, setTipInput] = useState("")
+  const tipsInputRef = useRef(null)
 
   function handleTypeEnter(e) {
     if (e.key === "Enter") {
@@ -26,6 +27,10 @@ export const TipsBackground = ({ color, rest, turn }) => {
     }
   }
 
+  useEffect(() => {
+    tipsInputRef?.current.focus()
+  }, [turn])
+
   return (
     <TipsContainer>
       <Title $color={color}>FALTAM: {rest}</Title>
@@ -37,6 +42,7 @@ export const TipsBackground = ({ color, rest, turn }) => {
           })}
         </TipsWrapper>
         <TipsInput
+          ref={tipsInputRef}
           show={turn}
           maxLength={21}
           value={tipInput}
