@@ -1,9 +1,8 @@
-#root {
-  width: 100%;
+import { styled } from "styled-components"
+
+export const GridWrapper = styled.div`
   display: flex;
-  margin: 0 auto;
-  text-align: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+`

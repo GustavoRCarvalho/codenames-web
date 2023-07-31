@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai"
-import { CommonButton } from "./CommonButton"
+import { CommonButton } from "../common/CommonButton"
+import { ContentContainer } from "../common/ContentLimit"
 
 export const Stopwatch = ({ time, turn, setTurn }) => {
   const [isPaused, setIsPaused] = useState(false)
@@ -56,7 +57,7 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
   )
 }
 
-const WatchContainer = styled.div`
+const WatchContainer = styled(ContentContainer)`
   display: flex;
   flex-direction: column;
   justify-content: center;

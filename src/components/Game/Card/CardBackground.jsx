@@ -1,5 +1,4 @@
 import { styled } from "styled-components"
-import { CardLabel } from "./CardLabel"
 
 export const CardBackground = ({
   label,
@@ -49,6 +48,9 @@ export const CardBackground = ({
 
 const Background = styled.div`
   background-color: ${(props) => (props.$active ? props.$color : "#474747")};
+  display: flex;
+  align-items: center;
+
   flex: 1;
 
   padding: 1em;
@@ -70,6 +72,9 @@ const Background = styled.div`
 `
 
 const CardInside = styled.div`
+  display: flex;
+  justify-content: center;
+
   flex: 1;
 
   padding: 1em;
@@ -78,4 +83,15 @@ const CardInside = styled.div`
   background-color: #0002;
   border: 1px ${(props) => (props.$active ? props.$bordercolor : "#505050")}
     solid;
+`
+
+const CardLabel = styled.p`
+  width: max-content;
+
+  padding: 0;
+  margin: 0;
+
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 `

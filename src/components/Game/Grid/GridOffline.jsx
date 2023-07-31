@@ -1,9 +1,10 @@
 import { styled } from "styled-components"
 import { CardBackground } from "../Card/CardBackground"
 import { useState } from "react"
-import { CommonButton } from "./CommonButton"
+import { CommonButton } from "../../common/CommonButton"
+import { GridWrapper } from "./GridWrapper"
 
-export const Grid = ({
+export const GridOffline = ({
   wordList,
   selected,
   setSelected,
@@ -58,11 +59,8 @@ export const Grid = ({
           return (
             <CardBackground
               key={card.label}
-              showAll={showAll}
               active={active}
               teamColor={card.teamColor}
-              selected={selected}
-              setSelected={setSelected}
               handleClickCard={handleClickCard}
               label={card.label}
             />
@@ -72,13 +70,6 @@ export const Grid = ({
     </GridWrapper>
   )
 }
-
-const GridWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
 
 const GridBackground = styled.div`
   display: grid;
