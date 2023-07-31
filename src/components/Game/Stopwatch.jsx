@@ -44,11 +44,11 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
   return (
     <WatchContainer>
       <WatchControl>
-        <ArrowLeftIcon show={turn} />
-        <Watch paused={isPaused}>
+        <ArrowLeftIcon show={turn ? 1 : 0} />
+        <Watch $paused={isPaused ? 1 : 0}>
           {minutes} : {seconds}
         </Watch>
-        <ArrowRightIcon show={!turn} />
+        <ArrowRightIcon show={!turn ? 1 : 0} />
       </WatchControl>
       <CommonButton onClick={handlePauseResume}>
         {isPaused ? "Continuar" : "Pausar"}
@@ -78,7 +78,7 @@ const Watch = styled.p`
 
   padding: 0.5em;
   border-radius: 0.5em;
-  border: ${(props) => (props.paused ? "2px solid red" : "2px solid #0000")};
+  border: ${(props) => (props.$paused ? "2px solid red" : "2px solid #0000")};
 `
 
 const ArrowRightIcon = styled(AiOutlineArrowRight)`

@@ -1,8 +1,11 @@
 import { styled } from "styled-components"
 
 export const TipsInput = styled.input`
-  display: ${(props) => (props.show ? "block" : "none")};
+  display: ${(props) => (props.$show ? "block" : "none")};
   background-color: #0002;
+  &::placeholder {
+    color: #fff;
+  }
 
   width: 90%;
   text-align: center;

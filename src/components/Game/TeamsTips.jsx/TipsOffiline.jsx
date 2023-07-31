@@ -41,7 +41,9 @@ export const TipsOffline = ({ color, rest, turn }) => {
       </TipsWrapper>
       <TipsInput
         ref={tipsInputRef}
-        show={turn}
+        placeholder="Insira a dica..."
+        title="Insert Tip"
+        $show={turn ? 1 : 0}
         maxLength={21}
         value={tipInput}
         onChange={(e) => {
