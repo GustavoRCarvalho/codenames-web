@@ -55,7 +55,7 @@ export const OfflineGamePage = () => {
       .map((label) => {
         return {
           label: label,
-          teamColor: "white",
+          teamColor: "black",
         }
       })
     return {
