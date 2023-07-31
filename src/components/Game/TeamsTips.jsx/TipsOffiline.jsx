@@ -17,7 +17,6 @@ export const TipsOffline = ({ color, rest, turn }) => {
         inputSplit.length === 2 &&
         Number.isInteger(Number(inputSplit[1]))
       ) {
-        console.log(inputSplit)
         setTips((value) => {
           return [...value, `${inputSplit[0] + " - " + inputSplit[1]}`]
         })
