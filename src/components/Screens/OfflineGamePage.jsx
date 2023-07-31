@@ -1,4 +1,4 @@
-import { getRandomArbitrary, shuffleArray } from "../../assets/utils"
+import { getRandomArbitrary, shuffleArray } from "../../utils/utils"
 import { words } from "../../assets/words"
 import { GridOffline } from "../Game/Grid/GridOffline"
 import { Stopwatch } from "../Game/Stopwatch"
