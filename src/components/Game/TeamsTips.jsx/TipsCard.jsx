@@ -1,6 +1,8 @@
 import { styled } from "styled-components"
 
-export const TipsCard = styled.p`
+export const TipsCard = styled.li`
+  list-style: none;
+
   background-color: #0003;
   box-shadow: 0.1em 0.1em #0006;
 

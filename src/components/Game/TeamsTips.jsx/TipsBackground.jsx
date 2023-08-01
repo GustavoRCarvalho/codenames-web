@@ -5,7 +5,7 @@ export const TipsBackground = ({ color, rest, children }) => {
     <TipsContainer>
       <Title $color={color}>FALTAM: {rest}</Title>
       <Background $backgroundcolor={color}>
-        <Title>DICAS: </Title>
+        <TipsListTitle id="tips">DICAS: </TipsListTitle>
         {children}
       </Background>
     </TipsContainer>
@@ -27,8 +27,16 @@ const Title = styled.h2`
 
   width: max-content;
 `
+const TipsListTitle = styled.label`
+  color: #fff;
+  margin: 0.9em;
+  font-size: 1.4em;
+  font-weight: bold;
 
-const Background = styled.div`
+  width: max-content;
+`
+
+const Background = styled.label`
   background-color: ${(props) => props.$backgroundcolor ?? "#474747"};
   width: 90%;
   flex: 1;

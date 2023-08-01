@@ -33,7 +33,7 @@ export const TipsOffline = ({ color, rest, turn }) => {
 
   return (
     <TipsBackground color={color} rest={rest}>
-      <TipsWrapper>
+      <TipsWrapper aria-label="tips">
         {tips.map((label, index) => {
           return <TipsCard key={label + index}>{label}</TipsCard>
         })}
@@ -42,7 +42,7 @@ export const TipsOffline = ({ color, rest, turn }) => {
         ref={tipsInputRef}
         placeholder="Insira a dica..."
         title="Insert Tip"
-        $show={turn ? 1 : 0}
+        $visible={turn}
         maxLength={21}
         value={tipInput}
         onChange={(e) => {
