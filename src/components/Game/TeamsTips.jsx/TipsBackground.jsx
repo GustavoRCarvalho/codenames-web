@@ -36,7 +36,7 @@ const TipsListTitle = styled.label`
   width: max-content;
 `
 
-const Background = styled.label`
+const Background = styled.div`
   background-color: ${(props) => props.$backgroundcolor ?? "#474747"};
   width: 90%;
   flex: 1;
