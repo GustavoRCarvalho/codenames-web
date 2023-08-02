@@ -100,3 +100,122 @@ export const gridMockData = [
     teamColor: "black",
   },
 ]
+
+const pinkList = [
+  {
+    label: "Abacaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Becaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Cecaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Dacaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Eacaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Facaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Gacaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Hacaxi",
+    teamColor: "pink",
+  },
+  {
+    label: "Iacaxi",
+    teamColor: "pink",
+  },
+]
+
+const blueList = [
+  {
+    label: "Jacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Lacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Kacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Macaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Nacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Oacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Pacaxi",
+    teamColor: "blue",
+  },
+  {
+    label: "Qacaxi",
+    teamColor: "blue",
+  },
+]
+
+const whiteList = [
+  {
+    label: "Racaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Sacaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Tacaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Uacaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Vacaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Wacaxi",
+    teamColor: "white",
+  },
+  {
+    label: "Xacaxi",
+    teamColor: "white",
+  },
+]
+
+const blackList = [
+  {
+    label: "Yacaxi",
+    teamColor: "black",
+  },
+]
+export const gameMockData = {
+  pinkList: pinkList,
+  blueList: blueList,
+  whiteList: whiteList,
+  blackList: blackList,
+  shuffle: gridMockData,
+}
