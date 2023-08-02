@@ -31,7 +31,7 @@ export const Stopwatch = ({ time, turn, handleChangeTurn }) => {
     if (minutes === "00" && seconds === "00") {
       handleChangeTurn()
     }
-  }, [handleChangeTurn, minutes, seconds])
+  }, [minutes, seconds])
 
   useEffect(() => {
     setTimeCount(time)
