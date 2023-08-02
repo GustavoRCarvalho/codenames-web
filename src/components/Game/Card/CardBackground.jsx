@@ -33,6 +33,7 @@ export const CardBackground = ({
 
   return (
     <Background
+      data-testid={"gridCell"}
       $active={active}
       $color={color().color}
       onClick={() =>

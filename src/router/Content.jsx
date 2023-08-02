@@ -2,13 +2,17 @@ import { Route, Routes } from "react-router-dom"
 import styled from "styled-components"
 import { OfflineGamePage } from "../components/Screens/OfflineGamePage"
 import { Menu } from "../components/Screens/Menu"
+import { wordList } from "../assets/FakeApiGrid"
 
 export default function Content() {
   return (
     <MainContainer>
       <Routes>
         <Route path="/" element={<Menu />}></Route>
-        <Route path="offline" element={<OfflineGamePage />} />
+        <Route
+          path="offline"
+          element={<OfflineGamePage wordList={wordList()} />}
+        />
         <Route path="online/:sala" element={<h1>Em implementação</h1>} />
         <Route path="*" element={<div>Error NOT Found</div>} />
       </Routes>

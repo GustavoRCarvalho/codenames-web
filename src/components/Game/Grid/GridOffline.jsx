@@ -51,7 +51,7 @@ export const GridOffline = ({
       <CommonButton onClick={handleClickShow}>
         {showAll ? "ESCONDER TODOS" : "MOSTRAR TODOS"}
       </CommonButton>
-      <GridBackground $column={column()}>
+      <GridBackground $column={column()} data-testid={"grid"}>
         {wordList.map((card) => {
           const active = showAll
             ? true

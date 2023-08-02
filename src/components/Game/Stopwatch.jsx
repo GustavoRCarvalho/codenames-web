@@ -4,7 +4,7 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai"
 import { CommonButton } from "../common/CommonButton"
 import { ContentContainer } from "../common/ContentLimit"
 
-export const Stopwatch = ({ time, turn, setTurn }) => {
+export const Stopwatch = ({ time, turn, handleChangeTurn }) => {
   const [isPaused, setIsPaused] = useState(false)
   const [timeCount, setTimeCount] = useState(time)
   const minutes = parseInt(timeCount / 60)
@@ -29,9 +29,9 @@ export const Stopwatch = ({ time, turn, setTurn }) => {
 
   useEffect(() => {
     if (minutes === "00" && seconds === "00") {
-      setTurn((value) => !value)
+      handleChangeTurn()
     }
-  }, [setTurn, minutes, seconds])
+  }, [handleChangeTurn, minutes, seconds])
 
   useEffect(() => {
     setTimeCount(time)

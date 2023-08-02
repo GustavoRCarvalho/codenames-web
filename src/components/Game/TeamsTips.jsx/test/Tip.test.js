@@ -1,13 +1,19 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import "@testing-library/jest-dom/extend-expect"
 import { TipsOffline } from "../TipsOffiline"
 
 test("input is showing and starts with focus.", () => {
+  render(<TipsOffline turn={true} color={"#eb37bc"} rest={9} />)
+
+  const inputTip = screen.getByPlaceholderText("Insira a dica...")
+  expect(inputTip).toHaveStyleRule("visibility", "visible")
+  expect(inputTip).toHaveFocus()
+})
+
+test("input is hidden because is not the rigth turn", () => {
   render(<TipsOffline turn={false} color={"#eb37bc"} rest={9} />)
 
   const inputTip = screen.getByPlaceholderText("Insira a dica...")
   expect(inputTip).toHaveStyleRule("visibility", "hidden")
-  // expect(inputTip).toHaveFocus()
 })
 
 test("when typing: 'word 1' and pressing enter on tip input, expect clean input.", () => {
@@ -38,4 +44,5 @@ test("when typing: 'word 1' and pressing enter on tip input, expect to add tip t
   const tipLabel = screen.getAllByRole("listitem")
   expect(tipLabel).toHaveLength(1)
   expect(tipLabel[0]).toHaveTextContent(/word - 1/i)
+  expect(tipLabel[0]).toHaveStyleRule("text-transform", "uppercase")
 })
