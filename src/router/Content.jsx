@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { OfflineGamePage } from "../components/Screens/OfflineGamePage"
 import { Menu } from "../components/Screens/Menu"
 import { wordList } from "../assets/FakeApiGrid"
+import { OnlineGamePage } from "../components/Screens/OnlineGamePage"
 
 export default function Content() {
   return (
@@ -13,7 +14,7 @@ export default function Content() {
           path="offline"
           element={<OfflineGamePage wordList={wordList()} />}
         />
-        <Route path="online/:sala" element={<h1>Em implementação</h1>} />
+        <Route path="online/:sala" element={<OnlineGamePage />} />
         <Route path="*" element={<div>Error NOT Found</div>} />
       </Routes>
     </MainContainer>

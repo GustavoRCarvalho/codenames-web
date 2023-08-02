@@ -63,9 +63,3 @@ export const OfflineGamePage = ({ wordList = {} }) => {
     </GameContainer>
   )
 }
-
-const GameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
