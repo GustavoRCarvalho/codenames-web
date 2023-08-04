@@ -2,23 +2,31 @@ import axios from "axios"
 import { GameContainer } from "../Game/GameContainer"
 import { useState, useEffect } from "react"
 import { io } from "socket.io-client"
+import { TipsGridContainer } from "../Game/TipsGridContainer"
+import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
+import { GridOnline } from "../Game/Grid/GridOnline"
+import { useLocation } from "react-router-dom"
 
-const socketGame = io("https://codenames-bd.adaptable.app")
-socketGame.connect()
+const socketGame = io("https://guesstheword.adaptable.app/")
 
 export const OnlineGamePage = () => {
+  const path = useLocation()
+  const roomCode = path.pathname.split(":")[1]
   const [gameStats, setGameStats] = useState({})
+
+  const pinkRest = 9
+  const blueRest = 8
+  const turn = true
   const session = "594dac"
 
-  function sendMessage(e) {
-    e.preventDefault()
-
-    socketGame.emit("change-game", session)
+  const sendMessage = () => {
+    socketGame.emit("change-game", roomCode)
+    console.log("sendmessage")
   }
 
-  const getChangeGame = ({ controller }) => {
+  const getUpdateGame = ({ controller }) => {
     axios
-      .get("https://codenames-bd.adaptable.app/game/594dac", {
+      .get(`https://guesstheword.adaptable.app/game/${roomCode}`, {
         signal: controller.signal,
       })
       .then(({ data }) => {
@@ -26,29 +34,47 @@ export const OnlineGamePage = () => {
       })
   }
 
+  console.log(socketGame)
+
   useEffect(() => {
     const controller = new AbortController()
+    socketGame.connect()
     socketGame.emit("add-player", session)
 
-    function onChangeGame({ message }) {
-      console.log("mudou: ", message)
-      getChangeGame({ controller: controller })
-    }
-    // function onConnect() {
-    //   console.log("conectou")
-    // }
-    // function onDisconnect() {
-    //   console.log("desconectou")
-    // }
-
-    socketGame.on("change-game", onChangeGame)
-    // socketGame.on("connect", onConnect)
-    // socketGame.on("disconnect", onDisconnect)
+    getUpdateGame({ controller: controller })
 
     return () => {
       controller.abort()
-      // socketGame.off("connect", onConnect)
-      // socketGame.off("disconnect", onDisconnect)
+    }
+  }, [])
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    function onChangeGame({ message }) {
+      console.log("mudou: ", message)
+      getUpdateGame({ controller: controller })
+    }
+
+    function onConnect() {
+      console.log("conectou")
+    }
+
+    function onDisconnect(reason) {
+      console.log("desconectou: ", reason)
+    }
+
+    socketGame.on("get-game", onChangeGame)
+    socketGame.on("connect", onConnect)
+    socketGame.on("disconnect", onDisconnect)
+
+    return () => {
+      controller.abort()
+      socketGame.off("connect", onConnect)
+      socketGame.off("disconnect", onDisconnect)
+      if (socketGame.connected) {
+        socketGame.close()
+      }
     }
   }, [socketGame])
 
@@ -56,39 +82,25 @@ export const OnlineGamePage = () => {
     console.log("ALTEROU")
   }, [gameStats])
 
-  // const [isConnected, setIsConnected] = useState(socketGame)
-  // const [fooEvents, setFooEvents] = useState(socketGame.connected)
-
-  // useEffect(() => {
-  //   function onConnect() {
-  //     setIsConnected(true)
-  //   }
-
-  //   function onDisconnect() {
-  //     setIsConnected(false)
-  //   }
-
-  //   function onFooEvent(value) {
-  //     setFooEvents((previous) => [...previous, value])
-  //   }
-
-  //   socketGame.on("connect", onConnect)
-  //   socketGame.on("disconnect", onDisconnect)
-  //   socketGame.on("foo", onFooEvent)
-
-  //   return () => {
-  //     socketGame.off("connect", onConnect)
-  //     socketGame.off("disconnect", onDisconnect)
-  //     socketGame.off("foo", onFooEvent)
-  //   }
-  // }, [])
+  function handleChangeTurn() {
+    // call api to change turn
+    getUpdateGame()
+  }
 
   return (
     <GameContainer>
-      {/* LIGADO: {toString(isConnected)} <br />
-      fooEvents: {toString(fooEvents)} */}
-      <button onClick={sendMessage}>MUDAR</button>
-      {JSON.stringify(gameStats)}
+      <TipsGridContainer>
+        <TipsOffline turn={turn} color={"#eb37bc"} rest={pinkRest} />
+        <GridOnline
+          wordList={gameStats.game_state}
+          roomCode={roomCode}
+          sendMessage={sendMessage}
+          turn={gameStats.turn}
+          handleChangeTurn={handleChangeTurn}
+        />
+        <TipsOffline turn={!turn} color={"#3aa4ff"} rest={blueRest} />
+      </TipsGridContainer>
+      <button onClick={() => sendMessage()}>MUDAR</button>
     </GameContainer>
   )
 }

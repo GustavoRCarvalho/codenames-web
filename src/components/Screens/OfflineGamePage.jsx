@@ -4,8 +4,8 @@ import { useState } from "react"
 import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
 import { NextTurnButton } from "../Game/NextTurnButton"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
-import { styled } from "styled-components"
 import { ContentContainer } from "../common/ContentLimit"
+import { GameContainer } from "../Game/GameContainer"
 
 export const OfflineGamePage = ({ wordList = {} }) => {
   const [selected, setSelected] = useState([])

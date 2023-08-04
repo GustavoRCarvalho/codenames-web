@@ -6,7 +6,7 @@ import { NoStyleLinkRouter } from "../common/NoStyleLinkRouter"
 export const Menu = () => {
   return (
     <MenuContainer>
-      <NoStyleLinkRouter to="online/:123">
+      <NoStyleLinkRouter to="online">
         <CommonButton>Jogar Online</CommonButton>
       </NoStyleLinkRouter>
       <NoStyleLinkRouter to="offline">
