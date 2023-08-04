@@ -7,15 +7,15 @@ export const CommonButton = styled.button`
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: #fff;
-  background-color: #1a1a1a;
-  cursor: pointer;
+  color: ${(props) => (props.disabled ? "#8e8e8e" : "#fff")};
+  background-color: ${(props) => (props.disabled ? "#202020" : "#1a1a1a")};
+  cursor: ${(props) => (props.disabled ? "normal" : "pointer")};
   transition: border-color 0.25s;
 
   margin: 1em;
 
   &:hover {
-    border-color: #646cff;
+    border-color: ${(props) => (props.disabled ? "transparent" : "#646cff")};
   }
   @media (prefers-color-scheme: light) {
     color: #000;
