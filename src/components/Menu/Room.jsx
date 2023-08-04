@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Tooltip } from "react-tooltip"
 import { EnterRoom } from "./EnterRoom"
+import { ToolTipCustom } from "../common/ToolTipCustom"
 
 export const Room = () => {
   const refEnterWrapper = useRef(null)
@@ -65,7 +66,7 @@ export const Room = () => {
           Criar Sala
         </CreateRoomButton>
       </span>
-      <ToolTipRoomButton
+      <ToolTipCustom
         place="bottom"
         id="CreateRoomButton"
         content="Função desativada para ajustes"
@@ -73,12 +74,6 @@ export const Room = () => {
     </RoomContainer>
   )
 }
-
-const ToolTipRoomButton = styled(Tooltip)`
-  &.styles-module_dark__xNqje {
-    background-color: #111;
-  }
-`
 
 const CreateRoomButton = styled(CommonButton)`
   width: ${(props) => props.width};

@@ -5,6 +5,7 @@ import { Menu } from "../components/Screens/Menu"
 import { wordList } from "../assets/FakeApiGrid"
 import { OnlineGamePage } from "../components/Screens/OnlineGamePage"
 import { Room } from "../components/Menu/Room"
+import { NotFound } from "../components/Screens/NotFound"
 
 export default function Content() {
   return (
@@ -17,7 +18,7 @@ export default function Content() {
         />
         <Route path="online" element={<Room />} />
         <Route path="online/:sala" element={<OnlineGamePage />} />
-        <Route path="*" element={<div>Error NOT Found</div>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </MainContainer>
   )
