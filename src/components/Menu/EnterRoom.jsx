@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 import { CommonInput } from "../common/CommonInput"
 import { CommonButton } from "../common/CommonButton"
 import { useState } from "react"
+import axios from "axios"
 
 export const EnterRoom = ({ refEnterWrapper }) => {
   const [room, setRoom] = useState("")
