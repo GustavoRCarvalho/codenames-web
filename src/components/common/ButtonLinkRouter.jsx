@@ -12,9 +12,7 @@ export const ButtonLinkRouter = ({ children, to, id = undefined }) => {
 
 export const LinkRouter = styled(NoStyleLinkRouter)`
   margin: 1em;
-  width: 100%;
 `
 export const Button = styled(CommonButton)`
   margin: 0em;
-  width: 100%;
 `
