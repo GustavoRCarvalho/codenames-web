@@ -1,14 +1,13 @@
 import { styled } from "styled-components"
 import { CommonButton } from "../common/CommonButton"
 import { ContentContainer } from "../common/ContentLimit"
-import { NoStyleLinkRouter } from "../common/NoStyleLinkRouter"
 import { useState, useRef, useEffect } from "react"
 import { CommonInput } from "../common/CommonInput"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 export const Room = () => {
-  const [room, setRoom] = useState("88a36d")
+  const [room, setRoom] = useState("")
   const [error, setError] = useState("")
   const refEnterWrapper = useRef(null)
   const [formWidth, setFormWidth] = useState("auto")
