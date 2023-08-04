@@ -37,6 +37,5 @@ const MenuContainer = styled(ContentContainer)`
 
   gap: 2em;
   grid-template-columns: 12em 12em;
-  grid-template-rows: 3em 3em;
   justify-content: center;
 `
