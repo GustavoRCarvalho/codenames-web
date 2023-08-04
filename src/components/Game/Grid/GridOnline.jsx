@@ -4,6 +4,7 @@ import { useState } from "react"
 import { CommonButton } from "../../common/CommonButton"
 import { GridWrapper } from "./GridWrapper"
 import axios from "axios"
+import { column } from "./gridCommon"
 
 export const GridOnline = ({
   wordList = [],
@@ -13,18 +14,6 @@ export const GridOnline = ({
   handleChangeTurn,
 }) => {
   const [showAll, setShowAll] = useState(false)
-
-  function column() {
-    let columnsNumber = Math.sqrt(wordList.length)
-    if (Number.isInteger(columnsNumber)) {
-      let columnslabel = ""
-      for (var i = 0; i < columnsNumber; i++) {
-        columnslabel += "1fr "
-      }
-      return columnslabel
-    }
-    return "1fr 1fr 1fr 1fr 1fr"
-  }
 
   const putChangeGame = ({ label }) => {
     console.log(wordList)
@@ -55,23 +44,6 @@ export const GridOnline = ({
       .catch(onFailure)
   }
 
-  function handleClickCard({ active, label, teamColor }) {
-    console.log("put")
-    if (!active) {
-      // chamar set mudou passando {label}
-      putChangeGame({ label })
-    }
-    if (teamColor === 2) {
-      handleChangeTurn()
-    } else if (teamColor === 1 && turn) {
-      handleChangeTurn()
-    } else if (teamColor === 0 && !turn) {
-      handleChangeTurn()
-    } else if (teamColor === 3) {
-      setShowAll(true)
-    }
-  }
-
   function handleClickShow() {
     setShowAll((value) => !value)
   }
@@ -81,16 +53,18 @@ export const GridOnline = ({
       <CommonButton onClick={handleClickShow}>
         {showAll ? "ESCONDER TODOS" : "MOSTRAR TODOS"}
       </CommonButton>
-      <GridBackground $column={column()} data-testid={"grid"}>
+      <GridBackground $column={column({ wordList })} data-testid={"grid"}>
         {wordList.map((card) => {
           const active = showAll ? true : card.turned
           return (
             <CardBackground
               key={card.word}
               active={active}
-              teamColor={card.team}
-              handleClickCard={handleClickCard}
               label={card.word}
+              turn={turn}
+              teamColor={card.team}
+              handleChangeTurn={handleChangeTurn}
+              method={() => putChangeGame({ label: card.word })}
             />
           )
         })}

@@ -1,10 +1,13 @@
 import { styled } from "styled-components"
+import { handleClickCard } from "../Grid/gridCommon"
 
 export const CardBackground = ({
   label,
   active,
   teamColor,
-  handleClickCard,
+  turn,
+  method,
+  handleChangeTurn,
 }) => {
   const color = () => {
     switch (teamColor) {
@@ -37,7 +40,13 @@ export const CardBackground = ({
       $active={active}
       $color={color().color}
       onClick={() =>
-        handleClickCard({ active: active, label: label, teamColor: teamColor })
+        handleClickCard({
+          active,
+          teamColor,
+          turn,
+          method,
+          handleChangeTurn,
+        })
       }
     >
       <CardInside $active={active} $bordercolor={color().bordercolor}>
@@ -51,10 +60,8 @@ const Background = styled.div`
   background-color: ${(props) => (props.$active ? props.$color : "#474747")};
   display: flex;
   align-items: center;
+  justify-content: center;
 
-  flex: 1;
-
-  padding: 1em;
   border-radius: 0.5em;
   color: ${(props) =>
     props.$color === "#fff" && props.$active ? "#000" : "#fff"};
@@ -76,9 +83,10 @@ const CardInside = styled.div`
   display: flex;
   justify-content: center;
 
-  flex: 1;
+  width: 100%;
 
-  padding: 1em;
+  padding: 0.8em;
+  margin: 0.8em;
   border-radius: 0.25em;
 
   background-color: #0002;
