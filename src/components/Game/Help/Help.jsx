@@ -28,6 +28,11 @@ export const Help = () => {
         cara time dar as dicas e chutar as palavras. Ao final do tempo, o
         cronometro reinicia e o turno passa para outra equipe.
       </HelpParagraph>
+      <HelpParagraph>
+        - O Word Master do time rosa, que é o primeiro time a jogar, tem a
+        tarefa de escrever uma dica para um grupo de palavras, enquanto sua
+        equipe se dedica a adivinhá-las.
+      </HelpParagraph>
       <RulesWrapper>
         <RulesLabels>
           <HelpTitle>Regras:</HelpTitle>
