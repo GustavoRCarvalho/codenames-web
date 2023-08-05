@@ -45,7 +45,7 @@ export const OfflineGamePage = ({ wordList = {} }) => {
       <TipsGridContainer>
         <TipsOffline
           turn={turn}
-          color={"var(--color-pink)"}
+          color={"var(--bg-color-pink)"}
           rest={pinkRest()}
         />
         <GridOffline
@@ -57,13 +57,13 @@ export const OfflineGamePage = ({ wordList = {} }) => {
         ></GridOffline>
         <TipsOffline
           turn={!turn}
-          color={"var(--color-blue)"}
+          color={"var(--bg-color-blue)"}
           rest={blueRest()}
         />
       </TipsGridContainer>
       <ContentContainer>
         <NextTurnButton
-          $color={turn ? "var(--color-pink)" : "var(--color-blue)"}
+          $color={turn ? "var(--bg-color-pink)" : "var(--bg-color-blue)"}
           onClick={handleChangeTurn}
         >
           Passar Turno

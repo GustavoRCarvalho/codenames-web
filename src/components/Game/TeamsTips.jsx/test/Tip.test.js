@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import { TipsOffline } from "../TipsOffiline"
 
 test("input is showing and starts with focus.", () => {
-  render(<TipsOffline turn={true} color={"#eb37bc"} rest={9} />)
+  render(<TipsOffline turn={true} color={"var(--bg-color-pink)"} rest={9} />)
 
   const inputTip = screen.getByPlaceholderText("Insira a dica...")
   expect(inputTip).toHaveStyleRule("visibility", "visible")
@@ -10,14 +10,14 @@ test("input is showing and starts with focus.", () => {
 })
 
 test("input is hidden because is not the rigth turn", () => {
-  render(<TipsOffline turn={false} color={"#eb37bc"} rest={9} />)
+  render(<TipsOffline turn={false} color={"var(--bg-color-pink)"} rest={9} />)
 
   const inputTip = screen.getByPlaceholderText("Insira a dica...")
   expect(inputTip).toHaveStyleRule("visibility", "hidden")
 })
 
 test("when typing: 'word 1' and pressing enter on tip input, expect clean input.", () => {
-  render(<TipsOffline turn={true} color={"#eb37bc"} rest={9} />)
+  render(<TipsOffline turn={true} color={"var(--bg-color-pink)"} rest={9} />)
 
   const inputTip = screen.getByPlaceholderText("Insira a dica...")
 
@@ -29,7 +29,7 @@ test("when typing: 'word 1' and pressing enter on tip input, expect clean input.
 })
 
 test("when typing: 'word 1' and pressing enter on tip input, expect to add tip to list on the format: 'WORD - 1'.", () => {
-  render(<TipsOffline turn={true} color={"#eb37bc"} rest={9} />)
+  render(<TipsOffline turn={true} color={"var(--bg-color-pink)"} rest={9} />)
 
   const inputTip = screen.getByPlaceholderText("Insira a dica...")
 

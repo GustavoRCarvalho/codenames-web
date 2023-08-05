@@ -71,7 +71,11 @@ export const Help = () => {
 
 const RuleBlock = styled.img`
   width: 100%;
-  background: linear-gradient(to right, var(--color-pink), var(--color-blue));
+  background: linear-gradient(
+    to right,
+    var(--bg-color-pink),
+    var(--bg-color-blue)
+  );
 
   border: 1px solid transparent;
   border-radius: 0.5em;
@@ -126,7 +130,11 @@ const HelpTitle = styled.h1`
   margin: 0;
   font-size: 3em;
 
-  background: linear-gradient(to right, var(--color-pink), var(--color-blue));
+  background: linear-gradient(
+    to right,
+    var(--bg-color-pink),
+    var(--bg-color-blue)
+  );
   -webkit-background-clip: text;
 
   color: transparent;

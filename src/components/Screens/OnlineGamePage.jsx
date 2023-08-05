@@ -89,7 +89,11 @@ export const OnlineGamePage = () => {
   return (
     <>
       <TipsGridContainer>
-        <TipsOffline turn={turn} color={"var(--color-pink)"} rest={pinkRest} />
+        <TipsOffline
+          turn={turn}
+          color={"var(--bg-color-pink)"}
+          rest={pinkRest}
+        />
         <GridOnline
           wordList={gameStats.game_state}
           roomCode={roomCode}
@@ -97,7 +101,11 @@ export const OnlineGamePage = () => {
           turn={gameStats.turn}
           handleChangeTurn={handleChangeTurn}
         />
-        <TipsOffline turn={!turn} color={"var(--color-blue)"} rest={blueRest} />
+        <TipsOffline
+          turn={!turn}
+          color={"var(--bg-color-blue)"}
+          rest={blueRest}
+        />
       </TipsGridContainer>
       <button onClick={() => sendMessage()}>MUDAR</button>
     </>

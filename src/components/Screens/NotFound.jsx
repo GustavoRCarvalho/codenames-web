@@ -36,7 +36,11 @@ const NumberTitle = styled.h1`
   font-size: 10em;
   line-height: 1em;
 
-  background: linear-gradient(to right, var(--color-pink), var(--color-blue));
+  background: linear-gradient(
+    to right,
+    var(--bg-color-pink),
+    var(--bg-color-blue)
+  );
   -webkit-background-clip: text;
 
   color: transparent;

@@ -10,22 +10,34 @@ test("click on card expect to change color", () => {
   expect(gridItens[0]).toHaveStyleRule("background-color", "#474747")
   fireEvent.click(gridItens[0])
 
-  expect(gridItens[0]).toHaveStyleRule("background-color", "#eb37bc")
+  expect(gridItens[0]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-pink)"
+  )
 
   expect(gridItens[9]).toHaveStyleRule("background-color", "#474747")
   fireEvent.click(gridItens[9])
 
-  expect(gridItens[9]).toHaveStyleRule("background-color", "#3aa4ff")
+  expect(gridItens[9]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-blue)"
+  )
 
   expect(gridItens[17]).toHaveStyleRule("background-color", "#474747")
   fireEvent.click(gridItens[17])
 
-  expect(gridItens[17]).toHaveStyleRule("background-color", "#fff")
+  expect(gridItens[17]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-white)"
+  )
 
   expect(gridItens[24]).toHaveStyleRule("background-color", "#474747")
   fireEvent.click(gridItens[24])
 
-  expect(gridItens[24]).toHaveStyleRule("background-color", "#121212")
+  expect(gridItens[24]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-black)"
+  )
 })
 test("click on card expect to change color and if click again expect to stay with the same color", () => {
   render(<OfflineGamePage wordList={gameMockData} />)
@@ -35,10 +47,16 @@ test("click on card expect to change color and if click again expect to stay wit
   expect(gridItens[0]).toHaveStyleRule("background-color", "#474747")
   fireEvent.click(gridItens[0])
 
-  expect(gridItens[0]).toHaveStyleRule("background-color", "#eb37bc")
+  expect(gridItens[0]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-pink)"
+  )
   fireEvent.click(gridItens[0])
 
-  expect(gridItens[0]).toHaveStyleRule("background-color", "#eb37bc")
+  expect(gridItens[0]).toHaveStyleRule(
+    "background-color",
+    "var(--bg-color-pink)"
+  )
 })
 
 test("click on turn button and expect to change to other team turn", () => {
@@ -46,11 +64,11 @@ test("click on turn button and expect to change to other team turn", () => {
 
   const turnButton = screen.getByRole("button", { name: "Passar Turno" })
 
-  expect(turnButton).toHaveStyleRule("background-color", "#eb37bc")
+  expect(turnButton).toHaveStyleRule("background-color", "var(--bg-color-pink)")
 
   fireEvent.click(turnButton)
 
-  expect(turnButton).toHaveStyleRule("background-color", "#3aa4ff")
+  expect(turnButton).toHaveStyleRule("background-color", "var(--bg-color-blue)")
 })
 
 test("click on white card or another team card and expect to change to other team turn", () => {
@@ -60,13 +78,13 @@ test("click on white card or another team card and expect to change to other tea
 
   const turnButton = screen.getByRole("button", { name: "Passar Turno" })
 
-  expect(turnButton).toHaveStyleRule("background-color", "#eb37bc")
+  expect(turnButton).toHaveStyleRule("background-color", "var(--bg-color-pink)")
 
   fireEvent.click(gridItens[17])
 
-  expect(turnButton).toHaveStyleRule("background-color", "#3aa4ff")
+  expect(turnButton).toHaveStyleRule("background-color", "var(--bg-color-blue)")
 
   fireEvent.click(gridItens[0])
 
-  expect(turnButton).toHaveStyleRule("background-color", "#eb37bc")
+  expect(turnButton).toHaveStyleRule("background-color", "var(--bg-color-pink)")
 })

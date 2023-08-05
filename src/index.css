@@ -1,8 +1,10 @@
 body {
-  --color-pink: #eb37bc;
-  --color-blue: #3aa4ff;
-  --color-white: #fff;
-  --color-black: #121212;
+  --bg-color-default-dark: #eb37bc;
+  --bg-color-default-light: #eb37bc;
+  --bg-color-pink: #eb37bc;
+  --bg-color-blue: #3aa4ff;
+  --bg-color-white: #fff;
+  --bg-color-black: #121212;
   --color-pink-border: #b4298f;
   --color-blue-border: #2967b4;
   --color-white-border: #2c2c2c;

@@ -84,13 +84,13 @@ const Watch = styled.p`
 `
 
 const ArrowRightIcon = styled(AiOutlineArrowRight)`
-  color: var(--color-blue);
+  color: var(--bg-color-blue);
   width: 2em;
   height: ${(props) => (props.show ? "2em" : "0em")};
 `
 
 const ArrowLeftIcon = styled(AiOutlineArrowLeft)`
-  color: var(--color-pink);
+  color: var(--bg-color-pink);
   width: 2em;
   height: ${(props) => (props.show ? "2em" : "0em")};
 `

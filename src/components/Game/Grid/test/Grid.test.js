@@ -67,13 +67,25 @@ test("click button 'MOSTRAR TODOS' to show all cards colors and check the quanti
   const gridItens = screen.getAllByTestId("gridCell")
   gridItens.forEach((element, index) => {
     if (index < 9) {
-      expect(element).toHaveStyleRule("background-color", "#eb37bc")
+      expect(element).toHaveStyleRule(
+        "background-color",
+        "var(--bg-color-pink)"
+      )
     } else if (index < 17) {
-      expect(element).toHaveStyleRule("background-color", "#3aa4ff")
+      expect(element).toHaveStyleRule(
+        "background-color",
+        "var(--bg-color-blue)"
+      )
     } else if (index < 24) {
-      expect(element).toHaveStyleRule("background-color", "#fff")
+      expect(element).toHaveStyleRule(
+        "background-color",
+        "var(--bg-color-white)"
+      )
     } else {
-      expect(element).toHaveStyleRule("background-color", "#121212")
+      expect(element).toHaveStyleRule(
+        "background-color",
+        "var(--bg-color-black)"
+      )
     }
   })
 })
