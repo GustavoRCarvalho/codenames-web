@@ -3,6 +3,7 @@ import { ContentContainer } from "../common/ContentLimit"
 import { ButtonLinkRouter } from "../common/ButtonLinkRouter"
 import { NoStyleLinkRouter } from "../common/NoStyleLinkRouter"
 import { CommonButton } from "../common/CommonButton"
+import { ToolTipCustom } from "../common/ToolTipCustom"
 
 export const Menu = () => {
   return (
@@ -14,11 +15,18 @@ export const Menu = () => {
         <Button type="button">Jogar Offline</Button>
       </NoStyleLinkRouter>
       <NoStyleLinkRouter to="help">
-        <Button type="button">Como Jogar</Button>
+        <Button type="button">Como Jogar?</Button>
       </NoStyleLinkRouter>
-      <NoStyleLinkRouter to="contact">
-        <Button type="button">Quem Somos</Button>
+      <NoStyleLinkRouter to="contact" data-tooltip-id="ContactButton">
+        <Button disabled type="button">
+          Quem Somos
+        </Button>
       </NoStyleLinkRouter>
+      <ToolTipCustom
+        place="bottom"
+        id="ContactButton"
+        content="Ops! Ainda não está pronto"
+      />
     </MenuContainer>
   )
 }

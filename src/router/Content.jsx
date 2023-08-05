@@ -6,6 +6,7 @@ import { wordList } from "../assets/FakeApiGrid"
 import { OnlineGamePage } from "../components/Screens/OnlineGamePage"
 import { Room } from "../components/Menu/Room"
 import { NotFound } from "../components/Screens/NotFound"
+import { Help } from "../components/Game/Help/Help"
 
 export default function Content() {
   return (
@@ -17,6 +18,7 @@ export default function Content() {
           element={<OfflineGamePage wordList={wordList()} />}
         />
         <Route path="online" element={<Room />} />
+        <Route path="help" element={<Help />} />
         <Route path="online/:sala" element={<OnlineGamePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

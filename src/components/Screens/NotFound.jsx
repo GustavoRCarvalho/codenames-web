@@ -1,18 +1,12 @@
 import { styled } from "styled-components"
 import { ContentContainer } from "../common/ContentLimit"
-import { CommonButton } from "../common/CommonButton"
-import { NoStyleLinkRouter } from "../common/NoStyleLinkRouter"
 import { ToolTipCustom } from "../common/ToolTipCustom"
 import { ButtonLinkRouter } from "../common/ButtonLinkRouter"
 
 export const NotFound = () => {
   return (
     <NotFoundContainer>
-      <NotFoundTitleWrapper>
-        <NumberTitle $color="#eb37bc">4</NumberTitle>
-        <NumberTitle $color="#666666">0</NumberTitle>
-        <NumberTitle $color="#3aa4ff">4</NumberTitle>
-      </NotFoundTitleWrapper>
+      <NumberTitle>404</NumberTitle>
       <NotFoundDescription>
         A página que você está procurando não pode ser encontrada!
       </NotFoundDescription>
@@ -42,7 +36,10 @@ const NumberTitle = styled.h1`
   font-size: 10em;
   line-height: 1em;
 
-  color: ${(props) => props.$color};
+  background: linear-gradient(to right, #3aa4ff, #eb37bc);
+  -webkit-background-clip: text;
+
+  color: transparent;
 
   margin: 0;
   user-select: none;
@@ -53,8 +50,4 @@ const NumberTitle = styled.h1`
 const NotFoundDescription = styled.span`
   color: #8d8d8d;
   font-family: "Barlow", sans-serif;
-`
-
-const NotFoundTitleWrapper = styled.div`
-  display: flex;
 `
