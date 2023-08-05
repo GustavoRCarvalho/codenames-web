@@ -7,22 +7,25 @@ export const CommonButton = styled.button`
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  color: ${(props) => (props.disabled ? "#8e8e8e" : "#fff")};
-  background-color: ${(props) => (props.disabled ? "#202020" : "#1a1a1a")};
+  color: ${(props) =>
+    props.disabled ? "#8e8e8e" : "var(--color-button-dark)"};
+  background-color: ${(props) =>
+    props.disabled ? "#202020" : "var(--bg-color-button-dark)"};
   cursor: ${(props) => (props.disabled ? "normal" : "pointer")};
   transition: border-color 0.25s;
 
   margin: 1em;
 
   &:hover {
-    border-color: ${(props) => (props.disabled ? "transparent" : "#646cff")};
+    border-color: ${(props) =>
+      props.disabled ? "transparent" : "var(--border-color-button-dark)"};
   }
   @media (prefers-color-scheme: light) {
-    color: #000;
-    background-color: #ededed;
+    color: var(--color-button-light);
+    background-color: var(--bg-color-button-light);
 
     &:hover {
-      border-color: #000447;
+      border-color: var(--border-color-button-light);
     }
   }
 `

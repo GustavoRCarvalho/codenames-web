@@ -14,23 +14,23 @@ export const CardBackground = ({
     switch (teamColor) {
       case "pink":
         return {
-          color: "#eb37bc",
-          bordercolor: "#b4298f",
+          color: "var(--color-pink)",
+          bordercolor: "var(--color-pink-border)",
         }
       case "blue":
         return {
-          color: "#3aa4ff",
-          bordercolor: "#2967b4",
+          color: "var(--color-blue)",
+          bordercolor: "var(--color-blue-border)",
         }
       case "white":
         return {
-          color: "#fff",
-          bordercolor: "#2c2c2c",
+          color: "var(--color-white)",
+          bordercolor: "var(--color-white-border)",
         }
       default:
         return {
-          color: "#121212",
-          bordercolor: "#ffeb00",
+          color: "var(--color-black)",
+          bordercolor: "var(--color-black-border)",
         }
     }
   }
@@ -66,14 +66,14 @@ const Background = styled.div`
 
   border-radius: 0.5em;
   color: ${(props) =>
-    props.$color === "#fff" && props.$active ? "#000" : "#fff"};
+    props.$color === "var(--color-white)" && props.$active ? "#000" : "#fff"};
 
   cursor: pointer;
 
   @media (prefers-color-scheme: light) {
     background-color: ${(props) => (props.$active ? props.$color : "#ffdece")};
     color: ${(props) =>
-      props.$color === "#fff" && props.$active
+      props.$color === "var(--color-white)" && props.$active
         ? "#000"
         : props.$active
         ? "#eeeeee"

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
 import { NextTurnButton } from "../Game/NextTurnButton"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
+import { HelpButton } from "../Game/Help/HelpButton"
 import { ContentContainer } from "../common/ContentLimit"
 
 export const OfflineGamePage = ({ wordList = {} }) => {
@@ -39,9 +40,14 @@ export const OfflineGamePage = ({ wordList = {} }) => {
 
   return (
     <>
+      <HelpButton />
       <Stopwatch time={240} turn={turn} handleChangeTurn={handleChangeTurn} />
       <TipsGridContainer>
-        <TipsOffline turn={turn} color={"#eb37bc"} rest={pinkRest()} />
+        <TipsOffline
+          turn={turn}
+          color={"var(--color-pink)"}
+          rest={pinkRest()}
+        />
         <GridOffline
           wordList={wordList.shuffle}
           selected={selected}
@@ -49,11 +55,15 @@ export const OfflineGamePage = ({ wordList = {} }) => {
           turn={turn}
           handleChangeTurn={handleChangeTurn}
         ></GridOffline>
-        <TipsOffline turn={!turn} color={"#3aa4ff"} rest={blueRest()} />
+        <TipsOffline
+          turn={!turn}
+          color={"var(--color-blue)"}
+          rest={blueRest()}
+        />
       </TipsGridContainer>
       <ContentContainer>
         <NextTurnButton
-          $color={turn ? "#eb37bc" : "#3aa4ff"}
+          $color={turn ? "var(--color-pink)" : "var(--color-blue)"}
           onClick={handleChangeTurn}
         >
           Passar Turno

@@ -1,4 +1,20 @@
 body {
+  --color-pink: #eb37bc;
+  --color-blue: #3aa4ff;
+  --color-white: #fff;
+  --color-black: #121212;
+  --color-pink-border: #b4298f;
+  --color-blue-border: #2967b4;
+  --color-white-border: #2c2c2c;
+  --color-black-border: #ffeb00;
+
+  --border-color-button-dark: #646cff;
+  --bg-color-button-dark: #1a1a1a;
+  --color-button-dark: #fff;
+  --border-color-button-light: #000447;
+  --bg-color-button-light: #ededed;
+  --color-button-light: #000;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

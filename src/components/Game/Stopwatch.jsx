@@ -68,6 +68,8 @@ const WatchControl = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-top: 1em;
 `
 
 const Watch = styled.p`
@@ -78,17 +80,17 @@ const Watch = styled.p`
 
   padding: 0.5em;
   border-radius: 0.5em;
-  border: ${(props) => (props.$paused ? "2px solid red" : "2px solid #0000")};
+  box-shadow: ${(props) => (props.$paused ? "inset 0px 0px 10px 1px red" : "")};
 `
 
 const ArrowRightIcon = styled(AiOutlineArrowRight)`
-  color: #3aa4ff;
+  color: var(--color-blue);
   width: 2em;
   height: ${(props) => (props.show ? "2em" : "0em")};
 `
 
 const ArrowLeftIcon = styled(AiOutlineArrowLeft)`
-  color: #eb37bc;
+  color: var(--color-pink);
   width: 2em;
   height: ${(props) => (props.show ? "2em" : "0em")};
 `
