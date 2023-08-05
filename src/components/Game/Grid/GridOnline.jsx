@@ -64,6 +64,7 @@ export const GridOnline = ({
               turn={turn}
               teamColor={card.team}
               handleChangeTurn={handleChangeTurn}
+              setShowAll={setShowAll}
               method={() => putChangeGame({ label: card.word })}
             />
           )

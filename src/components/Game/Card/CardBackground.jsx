@@ -7,6 +7,7 @@ export const CardBackground = ({
   teamColor,
   turn,
   method,
+  setShowAll,
   handleChangeTurn,
 }) => {
   const color = () => {
@@ -45,6 +46,7 @@ export const CardBackground = ({
           teamColor,
           turn,
           method,
+          setShowAll,
           handleChangeTurn,
         })
       }

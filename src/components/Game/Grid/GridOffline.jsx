@@ -35,6 +35,7 @@ export const GridOffline = ({
               active={active}
               teamColor={card.teamColor}
               turn={turn}
+              setShowAll={setShowAll}
               method={() =>
                 setSelected((values) => {
                   return [...values, card.label]

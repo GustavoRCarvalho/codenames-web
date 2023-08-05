@@ -14,6 +14,7 @@ export function handleClickCard({
   active,
   teamColor,
   turn,
+  setShowAll = () => {},
   method = () => {},
   handleChangeTurn = () => {},
 }) {
