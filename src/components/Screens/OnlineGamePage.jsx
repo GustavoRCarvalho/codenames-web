@@ -1,5 +1,4 @@
 import axios from "axios"
-import { GameContainer } from "../Game/GameContainer"
 import { useState, useEffect } from "react"
 import { io } from "socket.io-client"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
@@ -88,7 +87,7 @@ export const OnlineGamePage = () => {
   }
 
   return (
-    <GameContainer>
+    <>
       <TipsGridContainer>
         <TipsOffline turn={turn} color={"#eb37bc"} rest={pinkRest} />
         <GridOnline
@@ -101,6 +100,6 @@ export const OnlineGamePage = () => {
         <TipsOffline turn={!turn} color={"#3aa4ff"} rest={blueRest} />
       </TipsGridContainer>
       <button onClick={() => sendMessage()}>MUDAR</button>
-    </GameContainer>
+    </>
   )
 }

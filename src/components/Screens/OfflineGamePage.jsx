@@ -5,7 +5,6 @@ import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
 import { NextTurnButton } from "../Game/NextTurnButton"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
 import { ContentContainer } from "../common/ContentLimit"
-import { GameContainer } from "../Game/GameContainer"
 
 export const OfflineGamePage = ({ wordList = {} }) => {
   const [selected, setSelected] = useState([])
@@ -39,7 +38,7 @@ export const OfflineGamePage = ({ wordList = {} }) => {
   }
 
   return (
-    <GameContainer>
+    <>
       <Stopwatch time={240} turn={turn} handleChangeTurn={handleChangeTurn} />
       <TipsGridContainer>
         <TipsOffline turn={turn} color={"#eb37bc"} rest={pinkRest()} />
@@ -60,6 +59,6 @@ export const OfflineGamePage = ({ wordList = {} }) => {
           Passar Turno
         </NextTurnButton>
       </ContentContainer>
-    </GameContainer>
+    </>
   )
 }
