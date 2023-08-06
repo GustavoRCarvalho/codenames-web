@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { styled } from "styled-components"
 import { Help } from "./Help"
+import { ToolTipCustom } from "../../common/ToolTipCustom"
 
 export const HelpButton = () => {
   const [modal, setModal] = useState(false)
+  const [helpToolTip, setHelpToolTip] = useState(true)
 
   const handleClickClose = () => {
     setModal(false)
@@ -11,7 +13,22 @@ export const HelpButton = () => {
 
   return (
     <>
-      {!modal && <Button onClick={() => setModal(true)}>i</Button>}
+      {!modal && (
+        <Button
+          onMouseOver={() => setHelpToolTip(true)}
+          onMouseLeave={() => setHelpToolTip(false)}
+          data-tooltip-id="HelpButton"
+          onClick={() => setModal(true)}
+        >
+          i
+        </Button>
+      )}
+      <ToolTipCustom
+        isOpen={helpToolTip}
+        id="HelpButton"
+        place="left"
+        content={"Precisa de ajuda?"}
+      />
       <Modal $show={modal}>
         {modal && <Button onClick={handleClickClose}>X</Button>}
         <Help />
