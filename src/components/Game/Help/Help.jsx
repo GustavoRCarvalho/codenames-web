@@ -167,4 +167,6 @@ const HelpContainer = styled(ContentContainer)`
 
   margin-top: 1em;
   margin-bottom: 3em;
+
+  height: max-content;
 `
