@@ -12,12 +12,12 @@ export const GridOnline = ({
   roomCode,
   sendMessage,
   turn,
+  turnTeam,
   handleChangeTurn,
 }) => {
   const [showAll, setShowAll] = useState(false)
 
   const putChangeGame = ({ label }) => {
-    console.log(wordList)
     const wordsListState = wordList.map((wordObj) => {
       if (wordObj.word === label) {
         return {
@@ -28,16 +28,12 @@ export const GridOnline = ({
         return wordObj
       }
     })
-    console.log(wordsListState)
-    const payload = { turn: turn, game_state: wordsListState }
+    const payload = { turn: turnTeam, game_state: wordsListState }
 
-    function onSucess({ data }) {
+    function onSucess() {
       sendMessage()
-      console.log("putChanceGame: ", data.message)
     }
-    function onFailure(reason) {
-      console.log("catch - putChanceGame: ", reason)
-    }
+    function onFailure() {}
 
     axios
       .put(`${BaseURL}/game/${roomCode}`, payload)

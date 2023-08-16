@@ -56,7 +56,6 @@ export const Room = () => {
     e.preventDefault()
 
     postCreateGame()
-    console.log("click create")
   }
 
   return (

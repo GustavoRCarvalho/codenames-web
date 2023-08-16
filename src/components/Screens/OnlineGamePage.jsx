@@ -23,7 +23,6 @@ export const OnlineGamePage = () => {
 
   const sendMessage = () => {
     socketGame.emit("change-game", roomCode)
-    console.log("sendmessage")
   }
 
   const getUpdateGame = ({ controller }) => {
@@ -32,12 +31,9 @@ export const OnlineGamePage = () => {
         signal: controller.signal,
       })
       .then(({ data }) => {
-        console.log(data)
         setGameStats(data)
       })
   }
-
-  console.log(socketGame)
 
   useEffect(() => {
     const controller = new AbortController()
@@ -54,18 +50,13 @@ export const OnlineGamePage = () => {
   useEffect(() => {
     const controller = new AbortController()
 
-    function onChangeGame({ message }) {
-      console.log("emit mudou: ", message)
+    function onChangeGame() {
       getUpdateGame({ controller: controller })
     }
 
-    function onConnect() {
-      console.log("conectou")
-    }
+    function onConnect() {}
 
-    function onDisconnect(reason) {
-      console.log("desconectou: ", reason)
-    }
+    function onDisconnect() {}
 
     socketGame.on("get-game", onChangeGame)
     socketGame.on("connect", onConnect)
@@ -78,32 +69,18 @@ export const OnlineGamePage = () => {
     }
   }, [socketGame])
 
-  useEffect(() => {
-    console.log("ALTEROU")
-  }, [gameStats])
-
   function handleChangeTurn() {
-    // call api to change turn
     putChangeGame({ turn: gameStats.turn === "pink" ? "blue" : "pink" })
   }
 
   const putChangeGame = ({ turn }) => {
     const payload = { turn: turn }
 
-    function onSucess({ data }) {
-      console.log("putChanceGame: ", data.message)
-      setGameStats((value) => {
-        return {
-          ...value,
-          timer: data.timer,
-          turn: value.turn === "pink" ? "blue" : "pink",
-        }
-      })
+    function onSucess() {
+      sendMessage()
     }
 
-    function onFailure(reason) {
-      console.log("catch - putChanceGame: ", reason)
-    }
+    function onFailure() {}
 
     axios
       .put(`${BaseURL}/game/${roomCode}`, payload)
@@ -129,6 +106,7 @@ export const OnlineGamePage = () => {
           roomCode={roomCode}
           sendMessage={sendMessage}
           turn={boolTurn}
+          turnTeam={gameStats.turn}
           handleChangeTurn={handleChangeTurn}
         />
         <TipsOffline
