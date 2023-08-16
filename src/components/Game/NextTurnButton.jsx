@@ -1,7 +1,8 @@
 import { styled } from "styled-components"
 
 export const NextTurnButton = styled.button`
-  background-color: ${(props) => props.$color};
+  background-color: ${(props) =>
+    props.$turn ? "var(--bg-color-pink)" : "var(--bg-color-blue)"};
   color: #fff;
 
   width: 50%;

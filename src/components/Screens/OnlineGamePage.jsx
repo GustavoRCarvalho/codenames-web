@@ -5,18 +5,21 @@ import { TipsGridContainer } from "../Game/TipsGridContainer"
 import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
 import { GridOnline } from "../Game/Grid/GridOnline"
 import { useLocation } from "react-router-dom"
+import { BaseURL } from "../../Axios/Axios"
+import { Stopwatch } from "../Game/Stopwatch"
+import { ContentContainer } from "../common/ContentLimit"
+import { NextTurnButton } from "../Game/NextTurnButton"
 
-const socketGame = io("https://guesstheword.adaptable.app/")
+const socketGame = io(BaseURL)
 
 export const OnlineGamePage = () => {
   const path = useLocation()
   const roomCode = path.pathname.split(":")[1]
   const [gameStats, setGameStats] = useState({})
+  const boolTurn = gameStats?.turn === "pink" ? true : false
 
   const pinkRest = 9
   const blueRest = 8
-  const turn = true
-  const session = "594dac"
 
   const sendMessage = () => {
     socketGame.emit("change-game", roomCode)
@@ -25,10 +28,11 @@ export const OnlineGamePage = () => {
 
   const getUpdateGame = ({ controller }) => {
     axios
-      .get(`https://guesstheword.adaptable.app/game/${roomCode}`, {
+      .get(`${BaseURL}/game/${roomCode}`, {
         signal: controller.signal,
       })
       .then(({ data }) => {
+        console.log(data)
         setGameStats(data)
       })
   }
@@ -38,7 +42,7 @@ export const OnlineGamePage = () => {
   useEffect(() => {
     const controller = new AbortController()
     socketGame.connect()
-    socketGame.emit("add-player", session)
+    socketGame.emit("add-player", roomCode)
 
     getUpdateGame({ controller: controller })
 
@@ -51,7 +55,7 @@ export const OnlineGamePage = () => {
     const controller = new AbortController()
 
     function onChangeGame({ message }) {
-      console.log("mudou: ", message)
+      console.log("emit mudou: ", message)
       getUpdateGame({ controller: controller })
     }
 
@@ -71,9 +75,6 @@ export const OnlineGamePage = () => {
       controller.abort()
       socketGame.off("connect", onConnect)
       socketGame.off("disconnect", onDisconnect)
-      if (socketGame.connected) {
-        socketGame.close()
-      }
     }
   }, [socketGame])
 
@@ -83,14 +84,43 @@ export const OnlineGamePage = () => {
 
   function handleChangeTurn() {
     // call api to change turn
-    getUpdateGame()
+    putChangeGame({ turn: gameStats.turn === "pink" ? "blue" : "pink" })
+  }
+
+  const putChangeGame = ({ turn }) => {
+    const payload = { turn: turn }
+
+    function onSucess({ data }) {
+      console.log("putChanceGame: ", data.message)
+      setGameStats((value) => {
+        return {
+          ...value,
+          timer: data.timer,
+          turn: value.turn === "pink" ? "blue" : "pink",
+        }
+      })
+    }
+
+    function onFailure(reason) {
+      console.log("catch - putChanceGame: ", reason)
+    }
+
+    axios
+      .put(`${BaseURL}/game/${roomCode}`, payload)
+      .then(onSucess)
+      .catch(onFailure)
   }
 
   return (
     <>
+      <Stopwatch
+        time={gameStats.timer}
+        turn={boolTurn}
+        handleChangeTurn={handleChangeTurn}
+      />
       <TipsGridContainer>
         <TipsOffline
-          turn={turn}
+          turn={boolTurn}
           color={"var(--bg-color-pink)"}
           rest={pinkRest}
         />
@@ -98,15 +128,20 @@ export const OnlineGamePage = () => {
           wordList={gameStats.game_state}
           roomCode={roomCode}
           sendMessage={sendMessage}
-          turn={gameStats.turn}
+          turn={boolTurn}
           handleChangeTurn={handleChangeTurn}
         />
         <TipsOffline
-          turn={!turn}
+          turn={!boolTurn}
           color={"var(--bg-color-blue)"}
           rest={blueRest}
         />
       </TipsGridContainer>
+      <ContentContainer>
+        <NextTurnButton $turn={boolTurn} onClick={handleChangeTurn}>
+          Passar Turno
+        </NextTurnButton>
+      </ContentContainer>
       <button onClick={() => sendMessage()}>MUDAR</button>
     </>
   )

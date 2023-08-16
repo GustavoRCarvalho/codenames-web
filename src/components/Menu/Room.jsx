@@ -7,6 +7,7 @@ import axios from "axios"
 import { Tooltip } from "react-tooltip"
 import { EnterRoom } from "./EnterRoom"
 import { ToolTipCustom } from "../common/ToolTipCustom"
+import { BaseURL } from "../../Axios/Axios"
 
 export const Room = () => {
   const refEnterWrapper = useRef(null)
@@ -46,7 +47,7 @@ export const Room = () => {
     const onFailure = () => {}
 
     axios
-      .post(`https://guesstheword.adaptable.app/game/create-game`, payload)
+      .post(`${BaseURL}/game/create-game`, payload)
       .then(onSucess)
       .catch(onFailure)
   }
@@ -54,7 +55,7 @@ export const Room = () => {
   const handleCreateRoom = (e) => {
     e.preventDefault()
 
-    // postCreateGame()
+    postCreateGame()
     console.log("click create")
   }
 
@@ -62,7 +63,11 @@ export const Room = () => {
     <RoomContainer>
       <EnterRoom refEnterWrapper={refEnterWrapper} />
       <span data-tooltip-id="CreateRoomButton">
-        <CreateRoomButton disabled onClick={handleCreateRoom} width={formWidth}>
+        <CreateRoomButton
+          disabled={false}
+          onClick={handleCreateRoom}
+          width={formWidth}
+        >
           Criar Sala
         </CreateRoomButton>
       </span>

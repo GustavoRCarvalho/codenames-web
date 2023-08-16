@@ -5,6 +5,7 @@ import { CommonButton } from "../../common/CommonButton"
 import { GridWrapper } from "./GridWrapper"
 import axios from "axios"
 import { column } from "./gridCommon"
+import { BaseURL } from "../../../Axios/Axios"
 
 export const GridOnline = ({
   wordList = [],
@@ -39,7 +40,7 @@ export const GridOnline = ({
     }
 
     axios
-      .put(`https://guesstheword.adaptable.app/game/${roomCode}`, payload)
+      .put(`${BaseURL}/game/${roomCode}`, payload)
       .then(onSucess)
       .catch(onFailure)
   }

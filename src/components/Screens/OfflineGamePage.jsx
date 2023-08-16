@@ -62,10 +62,7 @@ export const OfflineGamePage = ({ wordList = {} }) => {
         />
       </TipsGridContainer>
       <ContentContainer>
-        <NextTurnButton
-          $color={turn ? "var(--bg-color-pink)" : "var(--bg-color-blue)"}
-          onClick={handleChangeTurn}
-        >
+        <NextTurnButton $turn={turn} onClick={handleChangeTurn}>
           Passar Turno
         </NextTurnButton>
       </ContentContainer>
