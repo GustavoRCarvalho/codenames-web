@@ -2,13 +2,13 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { io } from "socket.io-client"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
-import { TipsOffline } from "../Game/TeamsTips.jsx/TipsOffiline"
 import { GridOnline } from "../Game/Grid/GridOnline"
 import { useLocation } from "react-router-dom"
 import { BaseURL } from "../../Axios/Axios"
 import { Stopwatch } from "../Game/Stopwatch"
 import { ContentContainer } from "../common/ContentLimit"
 import { NextTurnButton } from "../Game/NextTurnButton"
+import { TipsOnline } from "../Game/TeamsTips.jsx/TipsOnline"
 
 const socketGame = io(BaseURL)
 
@@ -16,13 +16,34 @@ export const OnlineGamePage = () => {
   const path = useLocation()
   const roomCode = path.pathname.split(":")[1]
   const [gameStats, setGameStats] = useState({})
+  const [tips, setTips] = useState([])
   const boolTurn = gameStats?.turn === "pink" ? true : false
-
-  const pinkRest = 9
-  const blueRest = 8
 
   const sendMessage = () => {
     socketGame.emit("change-game", roomCode)
+  }
+
+  const sendTip = () => {
+    socketGame.emit("add-hint", roomCode)
+  }
+
+  const getUpdateTips = ({ controller }) => {
+    axios
+      .get(`${BaseURL}/hints/${roomCode}`, {
+        signal: controller.signal,
+      })
+      .then(({ data: { hints } }) => {
+        let pinkTips = []
+        let blueTips = []
+        hints.map(({ team, text }) => {
+          if (team === "pink") {
+            pinkTips = [...pinkTips, text]
+          } else {
+            blueTips = [...blueTips, text]
+          }
+        })
+        setTips({ pink: pinkTips, blue: blueTips })
+      })
   }
 
   const getUpdateGame = ({ controller }) => {
@@ -41,6 +62,7 @@ export const OnlineGamePage = () => {
     socketGame.emit("add-player", roomCode)
 
     getUpdateGame({ controller: controller })
+    getUpdateTips({ controller: controller })
 
     return () => {
       controller.abort()
@@ -54,11 +76,16 @@ export const OnlineGamePage = () => {
       getUpdateGame({ controller: controller })
     }
 
+    function onChangeTips() {
+      getUpdateTips({ controller: controller })
+    }
+
     function onConnect() {}
 
     function onDisconnect() {}
 
     socketGame.on("get-game", onChangeGame)
+    socketGame.on("get-hints", onChangeTips)
     socketGame.on("connect", onConnect)
     socketGame.on("disconnect", onDisconnect)
 
@@ -96,10 +123,14 @@ export const OnlineGamePage = () => {
         handleChangeTurn={handleChangeTurn}
       />
       <TipsGridContainer>
-        <TipsOffline
+        <TipsOnline
+          tips={tips.pink}
+          roomCode={roomCode}
+          sendTip={sendTip}
           turn={boolTurn}
+          team={"pink"}
           color={"var(--bg-color-pink)"}
-          rest={pinkRest}
+          rest={gameStats.rest_pink}
         />
         <GridOnline
           wordList={gameStats.game_state}
@@ -109,10 +140,14 @@ export const OnlineGamePage = () => {
           turnTeam={gameStats.turn}
           handleChangeTurn={handleChangeTurn}
         />
-        <TipsOffline
+        <TipsOnline
+          tips={tips.blue}
+          roomCode={roomCode}
+          sendTip={sendTip}
           turn={!boolTurn}
+          team={"blue"}
           color={"var(--bg-color-blue)"}
-          rest={blueRest}
+          rest={gameStats.rest_blue}
         />
       </TipsGridContainer>
       <ContentContainer>
