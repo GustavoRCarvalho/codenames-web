@@ -2,8 +2,7 @@ import { styled } from "styled-components"
 import { CommonInput } from "../common/CommonInput"
 import { CommonButton } from "../common/CommonButton"
 import { useState } from "react"
-import axios from "axios"
-import { BaseURL } from "../../Axios/Axios"
+import { axiosKit as axios } from "../../Axios/Axios"
 import { useNavigate } from "react-router-dom"
 
 export const EnterRoom = ({ refEnterWrapper }) => {
@@ -20,7 +19,7 @@ export const EnterRoom = ({ refEnterWrapper }) => {
       setError("Sala não existe")
     }
 
-    axios.get(`${BaseURL}/game/${roomCode}`).then(onSucess).catch(onFailure)
+    axios.get(`game/${roomCode}`).then(onSucess).catch(onFailure)
   }
 
   const handleEnterInput = (e) => {

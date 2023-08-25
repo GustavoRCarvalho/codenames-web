@@ -1,2 +1,8 @@
-export const BaseURL =
-  "http://ec2-54-233-102-16.sa-east-1.compute.amazonaws.com:3000"
+import axios from "axios"
+
+export const BaseURL = "http://54.232.211.253:3000/"
+
+export const axiosKit = axios.create({
+  baseURL: BaseURL,
+  timeout: 10000,
+})

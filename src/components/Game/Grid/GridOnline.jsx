@@ -3,9 +3,8 @@ import { CardBackground } from "../Card/CardBackground"
 import { useState } from "react"
 import { CommonButton } from "../../common/CommonButton"
 import { GridWrapper } from "./GridWrapper"
-import axios from "axios"
+import { axiosKit as axios } from "../../../Axios/Axios"
 import { column } from "./gridCommon"
-import { BaseURL } from "../../../Axios/Axios"
 
 export const GridOnline = ({
   wordList = [],
@@ -35,10 +34,7 @@ export const GridOnline = ({
     }
     function onFailure() {}
 
-    axios
-      .put(`${BaseURL}/game/${roomCode}`, payload)
-      .then(onSucess)
-      .catch(onFailure)
+    axios.put(`game/${roomCode}`, payload).then(onSucess).catch(onFailure)
   }
 
   function handleClickShow() {

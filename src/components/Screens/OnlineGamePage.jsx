@@ -1,4 +1,4 @@
-import axios from "axios"
+import { axiosKit as axios } from "../../Axios/Axios"
 import { useState, useEffect } from "react"
 import { io } from "socket.io-client"
 import { TipsGridContainer } from "../Game/TipsGridContainer"
@@ -29,7 +29,7 @@ export const OnlineGamePage = () => {
 
   const getUpdateTips = ({ controller }) => {
     axios
-      .get(`${BaseURL}/hints/${roomCode}`, {
+      .get(`hints/${roomCode}`, {
         signal: controller.signal,
       })
       .then(({ data: { hints } }) => {
@@ -48,7 +48,7 @@ export const OnlineGamePage = () => {
 
   const getUpdateGame = ({ controller }) => {
     axios
-      .get(`${BaseURL}/game/${roomCode}`, {
+      .get(`game/${roomCode}`, {
         signal: controller.signal,
       })
       .then(({ data }) => {
@@ -109,10 +109,7 @@ export const OnlineGamePage = () => {
 
     function onFailure() {}
 
-    axios
-      .put(`${BaseURL}/game/${roomCode}`, payload)
-      .then(onSucess)
-      .catch(onFailure)
+    axios.put(`game/${roomCode}`, payload).then(onSucess).catch(onFailure)
   }
 
   return (

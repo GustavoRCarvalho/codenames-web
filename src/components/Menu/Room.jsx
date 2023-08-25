@@ -3,11 +3,9 @@ import { CommonButton } from "../common/CommonButton"
 import { ContentContainer } from "../common/ContentLimit"
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
-import { Tooltip } from "react-tooltip"
+import { axiosKit as axios } from "../../Axios/Axios"
 import { EnterRoom } from "./EnterRoom"
 import { ToolTipCustom } from "../common/ToolTipCustom"
-import { BaseURL } from "../../Axios/Axios"
 
 export const Room = () => {
   const refEnterWrapper = useRef(null)
@@ -46,10 +44,7 @@ export const Room = () => {
 
     const onFailure = () => {}
 
-    axios
-      .post(`${BaseURL}/game/create-game`, payload)
-      .then(onSucess)
-      .catch(onFailure)
+    axios.post(`game/create-game`, payload).then(onSucess).catch(onFailure)
   }
 
   const handleCreateRoom = (e) => {

@@ -3,8 +3,7 @@ import { TipsInput } from "./TipsInput"
 import { useEffect, useRef, useState } from "react"
 import { TipsWrapper } from "./TipsWrappper"
 import { TipsBackground } from "./TipsBackground"
-import axios from "axios"
-import { BaseURL } from "../../../Axios/Axios"
+import { axiosKit as axios } from "../../../Axios/Axios"
 
 export const TipsOnline = ({
   roomCode,
@@ -44,7 +43,7 @@ export const TipsOnline = ({
     function onFailure() {}
 
     axios
-      .post(`${BaseURL}/hints/create/${roomCode}`, payload)
+      .post(`hints/create/${roomCode}`, payload)
       .then(onSucess)
       .catch(onFailure)
   }
