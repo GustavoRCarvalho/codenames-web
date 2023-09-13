@@ -1,5 +1,8 @@
 # Guess the Word - Game
 
+Acesse: (Guess the Word)[https://guesstheword.gustavocarvalho.dev.br/]
+Este site está hospedado na plataforma Amazon Amplify.
+
 Jogo de adivinhação com dicas para ser jogado com seus amigos online ou em um único dispositivo.
 
 # Dependencias:
